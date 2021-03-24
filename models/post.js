@@ -1,6 +1,10 @@
 import mongoose from "mongoose";
 
 const postSchema = mongoose.Schema({
+  userId: {
+    type: Mongoose.ObjectId,
+    required: true,
+  },
   category: {
     //DROPDOWN MENU
     type: String,
