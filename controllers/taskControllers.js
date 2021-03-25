@@ -1,63 +1,66 @@
 const Task = require("../models/task.js");
 
-const addPost = async (req, res) => {
+const addTask = async (req, res) => {
   const {
     userId,
     category,
     title,
     description,
+    location,
     payrate,
     startdate,
     enddate,
   } = req.body;
   try {
-    const post = await Task.create({
+    const task = await Task.create({
       userId,
       category,
       title,
       description,
+      location,
       payrate,
       startdate,
       enddate,
     });
-    if (post) {
+    if (task) {
       res.status(201).json({
         message: "Post added",
-        id: post._id,
+        id: task._id,
       });
     } else {
-      res.status(400).json({
-        message: "Error",
-        post: req.body,
+      res.status(500).json({
+        message: "Internal server error",
+        task: req.body,
       });
     }
   } catch (error) {
     console.error(error);
-    res.status(500).json({
-      message: "Error",
-      post: req.body,
+    res.status(400).json({
+      message: "Invalid request body",
+      task: req.body,
     });
   }
 };
 
-const findPost = async (req, res) => {
+const findTask = async (req, res) => {
   const { id } = req.params;
   try {
-    const found = await MakeTask.findby(id);
-    if (!found){
+    const found = await Task.findById(id);
+    if (!found) {
       return res.status(404).json({
-        message: "Post not found"
-      })
+        message: "Task not found",
+      });
     }
+    res.status(200).json(found);
   } catch (error) {
     console.error(error);
-    res.status(500).json({
-      message: error.message
+    res.status(400).json({
+      message: error.message,
     });
   }
 };
 
 module.exports = {
-  addPost,
-  findPost,
+  addTask,
+  findTask,
 };
