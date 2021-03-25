@@ -9,7 +9,7 @@ const postSchema = mongoose.Schema({
     //DROPDOWN MENU
     type: String,
     required: true,
-    enum: ["Home repairs", "Shopping", "Child sitting", "Pet sitting"],
+    enum: ["Home repairs", "Shopping", "Baby sitting", "Pet sitting"],
   },
   title: {
     type: String,
