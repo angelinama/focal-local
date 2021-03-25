@@ -1,17 +1,16 @@
 import React from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
-import Wrapper from "./components/Wrapper";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Welcome from "./pages/Welcome";
 import Start from "./pages/Start";
 import PostTaskPage from "./pages/PostTaskPage"
 
 const App = () => (
   <Router>
-    <Wrapper>
+    <Switch>
       <Route exact path="/" component={Start} />
       <Route exact path="/tasks" component={Welcome} />
       <Route exact path="/addtask" component={PostTaskPage} />
-    </Wrapper>
+    </Switch>
   </Router>
 );
 
