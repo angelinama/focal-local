@@ -33,16 +33,31 @@ const addPost = async (req, res) => {
     }
   } catch (error) {
     console.error(error);
-    res.status(400).json({
+    res.status(500).json({
       message: "Error",
       post: req.body,
     });
   }
 };
 
-
-
+const findPost = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const found = await Post.findby(id);
+    if (!found){
+      return res.status(404).json({
+        message: "Post not found"
+      })
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      message: error.message
+    });
+  }
+};
 
 module.exports = {
   addPost,
+  findPost,
 };
