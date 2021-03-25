@@ -39,6 +39,7 @@ const PostTaskPage = () => {
     <>
       <NavTabs />
       <Wrapper>
+      <h1>***POST A TASK PAGE***</h1>
           {/* "handleSubmit" will validate your inputs before invoking "onSubmit" */}
           <Form onSubmit= {handleSubmit(onSubmit)}>
             {/* register your input into the hook by invoking the "register" function */}

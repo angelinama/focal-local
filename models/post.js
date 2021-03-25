@@ -38,6 +38,6 @@ const postSchema = mongoose.Schema({
   },
 });
 
-const Post = mongoose.model("Post", postSchema);
+const MakeTask = mongoose.model("MakeTask", postSchema);
 
-export default Post;
+export default MakeTask;
