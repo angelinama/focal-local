@@ -1,12 +1,11 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
 
 const TaskSchema = mongoose.Schema({
-  userId: {
-    type: Mongoose.ObjectId,
-    required: true,
-  },
+  // userId: {
+  //   type: mongoose.ObjectId,
+  //   required: true,
+  // },
   category: {
-    //DROPDOWN MENU
     type: String,
     required: true,
     enum: ["Home repairs", "Shopping", "Baby sitting", "Pet sitting"],
@@ -23,6 +22,9 @@ const TaskSchema = mongoose.Schema({
     maxLength: 250,
     minLength: 20,
   },
+  location: {
+    type: String,
+  },
   payrate: {
     type: Number,
     required: true,
@@ -34,10 +36,9 @@ const TaskSchema = mongoose.Schema({
   },
   enddate: {
     type: Date,
-    required: true,
   },
 });
 
 const Task = mongoose.model("Task", TaskSchema);
 
-export default Task;
+module.exports = Task;
