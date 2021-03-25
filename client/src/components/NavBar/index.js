@@ -10,7 +10,7 @@ function NavTabs() {
     <nav
       className="navbar navbar-expand-md navbar-dark justify-content-between"
     >
-      <Link className="navbar-brand nav-text" to="/tasks">
+      <Link className="navbar-brand nav-text" to="/">
         Focal Local
       </Link>
 
@@ -45,9 +45,9 @@ function NavTabs() {
           </li>
           <li className="nav-item">
             <Link
-              to="/tasks"
+              to="/gettask"
               className={
-                location.pathname === "/tasks" ? "nav-link active" : "nav-link"
+                location.pathname === "/gettask" ? "nav-link active" : "nav-link"
               }
             >
               Get A Task
