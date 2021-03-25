@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const postSchema = mongoose.Schema({
+const TaskSchema = mongoose.Schema({
   userId: {
     type: Mongoose.ObjectId,
     required: true,
@@ -38,6 +38,6 @@ const postSchema = mongoose.Schema({
   },
 });
 
-const MakeTask = mongoose.model("MakeTask", postSchema);
+const Task = mongoose.model("Task", TaskSchema);
 
-export default MakeTask;
+export default Task;
