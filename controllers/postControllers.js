@@ -1,4 +1,4 @@
-const Post = require("../models/post");
+const MakeTask = require("../models/post");
 
 const addPost = async (req, res) => {
   const {
@@ -11,7 +11,7 @@ const addPost = async (req, res) => {
     enddate,
   } = req.body;
   try {
-    const post = await Post.create({
+    const post = await MakeTask.create({
       userId,
       category,
       title,
@@ -43,7 +43,7 @@ const addPost = async (req, res) => {
 const findPost = async (req, res) => {
   const { id } = req.params;
   try {
-    const found = await Post.findby(id);
+    const found = await MakeTask.findby(id);
     if (!found){
       return res.status(404).json({
         message: "Post not found"
