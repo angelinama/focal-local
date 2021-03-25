@@ -1,13 +1,13 @@
-const MakeTask = require("../../controllers/postControllers");
+const Task = require("../../controllers/postControllers");
 //change name to postTask
 const router = require("express").Router();
 
 router
   .route("/post")
-  .post(MakeTask.addPost)
+  .post(Task.addPost)
 
 router
   .route("/:id")
-  .get(MakeTask.findPost)
+  .get(Task.findPost)
 
 module.exports = router;

@@ -1,4 +1,4 @@
-const MakeTask = require("../models/post");
+const Task = require("../models/task.js");
 
 const addPost = async (req, res) => {
   const {
@@ -11,7 +11,7 @@ const addPost = async (req, res) => {
     enddate,
   } = req.body;
   try {
-    const post = await MakeTask.create({
+    const post = await Task.create({
       userId,
       category,
       title,
