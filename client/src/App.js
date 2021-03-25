@@ -3,7 +3,8 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import Wrapper from "./components/Wrapper";
 import Welcome from "./pages/Welcome";
 import Start from "./pages/Start";
-import PostTaskPage from "./pages/PostTaskPage"
+import PostTaskPage from "./pages/PostTaskPage";
+import "./App.css";
 
 const App = () => (
   <Router>
