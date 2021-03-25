@@ -16,6 +16,7 @@ const errorMessage = ({ type, minLength = 0, maxLength = 0 }) => {
 };
 
 const PostTaskPage = () => {
+  
   const { register, handleSubmit, watch, errors } = useForm();
 
   const onSubmit = (data) => {
