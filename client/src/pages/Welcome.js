@@ -4,10 +4,12 @@ import NavTabs from "../components/NavBar";
 
 const Welcome = () => (
   <div>
-    <NavTabs/>
-    <h1>THIS IS WELCOME - GET A TASK PAGE</h1>
-    <p>here - add search for local tasks </p>
-    <p>here - tasks card </p>
+    <NavTabs />
+    <h1>THIS WILL BECOME OUR FUTURE WELCOME </h1>
+    <p>search for local tasks </p>
+    <p>add a task for your local community</p>
+    <p>add local events</p>
+    <p>etc</p>
   </div>
 );
 
