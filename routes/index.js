@@ -12,14 +12,10 @@ router.use("/auth", authRoutes);
 router.use("/api", apiRoutes);
 
 // Send every other request to the React app
-router.get(
-  "*",
-  // passport.authenticate("jwt", { session: false }),
-  (req, res) => {
-    //TODO  error from postman build folder does not exist
-    res.sendFile(path.join(__dirname, "../client/build/index.html"));
-    // res.json("protected route");
-  }
-);
+router.get("*", (req, res) => {
+  //TODO  error from postman build folder does not exist
+  res.sendFile(path.join(__dirname, "../client/build/index.html"));
+  // res.json("protected route");
+});
 
 module.exports = router;
