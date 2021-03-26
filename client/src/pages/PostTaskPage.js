@@ -4,8 +4,7 @@ import { useForm } from "react-hook-form";
 import moment from "moment";
 import NavTabs from "../components/NavBar";
 import Wrapper from "../components/Wrapper";
-
-
+import axios from "axios";
 
 const options = ["Home repairs", "Shopping", "Baby sitting", "Pet sitting"];
 
@@ -31,6 +30,8 @@ const PostTaskPage = () => {
     const endMoment = moment(`${data.enddate} ${data.endtime}`, "YYYY-MM-DD HH:mm");
     console.log(endMoment.toISOString());
 
+    //api call
+    axios.post("/api/task", data);
   };
 
   console.log({ watch, errors });
@@ -107,7 +108,7 @@ const PostTaskPage = () => {
             <input
               name="enddate"
               type="date"
-              ref={register({ required: true })}
+              ref={register({ required: false })}
               className={errors.enddate ? "error" : ""}
             />
             {/* errors will return when field validation fails  */}
@@ -134,7 +135,7 @@ const PostTaskPage = () => {
             <input
               name="endtime"
               type="time"
-              ref={register({ required: true })}
+              ref={register({ required: false })}
               className={errors.endtime ? "error" : ""}
             />
             {/* errors will return when field validation fails  */}

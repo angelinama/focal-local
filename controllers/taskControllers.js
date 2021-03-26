@@ -60,7 +60,25 @@ const findTask = async (req, res) => {
   }
 };
 
+const findAllTasks = async (req, res) => {
+  try {
+    const found = await Task.find({});
+    if (!found) {
+      return res.status(404).json({
+        message: "No tasks found",
+      });
+    }
+    res.status(200).json(found);
+  } catch (error) {
+    console.error(error);
+    res.status(400).json({
+      message: error.message,
+    });
+  }
+};
+
 module.exports = {
   addTask,
   findTask,
+  findAllTasks
 };

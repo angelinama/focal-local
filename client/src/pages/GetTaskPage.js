@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+
 import { useForm } from "react-hook-form";
 import NavTabs from "../components/NavBar";
 import { Form, Button } from "react-bootstrap";
 import Wrapper from "../components/Wrapper";
+import axios from "axios";
+import AllTasks from "../components/AllTasks";
 
 const options = ["Home repairs", "Shopping", "Baby sitting", "Pet sitting"];
 
@@ -17,9 +20,31 @@ const errorMessage = ({ type, minLength = 0, maxLength = 0 }) => {
 
 const GetTaskPage = () => {
   const { register, handleSubmit, watch, errors } = useForm();
+  // Tasks state
+  const [taskList, setTaskList] = useState([]);
+  const [filteredTasks, setFilteredTasks] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("/api/task")
+      .then((response) => {
+        // handle success
+        setTaskList(response.data);
+        setFilteredTasks(response.data);
+      })
+      .catch((error) => {
+        // handle error
+        console.log(error);
+      });
+  }, []);
 
   const onSubmit = (data) => {
     console.log(data);
+    let results = taskList.filter((task) => {
+      return task.category === data.category;
+    });
+
+    setFilteredTasks(results);
   };
 
   console.log({ watch, errors });
@@ -92,6 +117,12 @@ const GetTaskPage = () => {
           <Button type="submit"> Submit </Button>
         </Form>
       </Wrapper>
+
+      <AllTasks
+        taskList={taskList}
+        filteredTasks={filteredTasks}
+        setFilteredTasks={setFilteredTasks}
+      />
     </>
   );
 };
