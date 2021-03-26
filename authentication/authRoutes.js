@@ -2,15 +2,19 @@ const Router = require("express").Router();
 const db = require("../models");
 const passport = require("./strategy");
 require("dotenv").config();
+const jwt = require("jsonwebtoken");
 
 Router.post("/login", (req, res, next) => {
+  //???Why here is not "jwt"
   passport.authenticate(
     "local",
     { session: false },
     (err, user, additionalMessage) => {
       if (err || !user) {
         //TODO should I do anything else when there is an incorrect email???
-        return res.status(400).json(additionalMessage);
+        return res
+          .status(400)
+          .json({ message: additionalMessage, error: err, user: user });
       }
 
       req.login(user, { session: false }, (err) => {
@@ -18,9 +22,16 @@ Router.post("/login", (req, res, next) => {
           res.status(500).send(err);
         }
         //TODO when successfully logged in, redirect page
-        // const token = "some token";
-        // res.json({ email: user.email, token: token });
-        res.status(200).json({ message: "successfully logged in" }); //with local strategy
+        const token = jwt.sign(
+          { id: user._id, email: user.email },
+          process.env.PASSPORT_SECRET
+        );
+
+        res.status(200).json({
+          email: user.email,
+          token: token,
+          message: "Successfully logged in",
+        });
       });
     }
   )(req, res, next);

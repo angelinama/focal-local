@@ -43,14 +43,18 @@ passport.use(
       jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
       secretOrKey: process.env.PASSPORT_SECRET,
     },
-    async function (jwtPayload, cb) {
-      //TODO should this be jwtPayload.sub? from the JWT website
-      const user = await db.User.find({ _id: jwtPayload.id });
-      try {
-        return cb(null, user);
-      } catch (err) {
-        return cb(err);
-      }
+    function (jwt_payload, done) {
+      db.User.findOne({ _id: jwt_payload.id }, function (err, user) {
+        if (err) {
+          return done(err, false);
+        }
+        if (user) {
+          return done(null, user);
+        } else {
+          return done(null, false);
+          // or you could create a new account
+        }
+      });
     }
   )
 );
