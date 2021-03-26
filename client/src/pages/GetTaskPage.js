@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-
 import { useForm } from "react-hook-form";
 import NavTabs from "../components/NavBar";
 import { Form, Button } from "react-bootstrap";
@@ -39,9 +38,12 @@ const GetTaskPage = () => {
   }, []);
 
   const onSubmit = (data) => {
-    console.log(data);
+    console.log({data});
     let results = taskList.filter((task) => {
-      return task.category === data.category;
+      console.log({task: task.category, data: data.category});
+      return data.category.includes(task.category);
+    }).filter((task)=>{
+      return data.volunteer ? task.payrate === 0 : true;
     });
 
     setFilteredTasks(results);
@@ -55,74 +57,67 @@ const GetTaskPage = () => {
       <Wrapper>
         <h1>***GET A TASK PAGE***</h1>
         <Form onSubmit={handleSubmit(onSubmit)}>
-          <select name="category" ref={register}>
-            {options.map((value) => (
-              <option key={value} value={value}>
-                {value}
-              </option>
-            ))}
-          </select>
+          {/* CATEGORY  */}
+          <Form.Group controlId="category">
+            <Form.Label>Choose a category</Form.Label>
+            <Form.Control as="select" multiple name="category" ref={register}>
+              {options.map((value) => (
+                <option key={value} value={value}>
+                  {value}
+                </option>
+              ))}
+            </Form.Control>
+          </Form.Group>
+          {/* ONLY VOLUNTEERS? */}
+          <Form.Group id="formGridCheckbox">
+            <Form.Check 
+            name="volunteer"
+            type="checkbox" 
+            label="Find only volunteer tasks"
+            ref={register({ required: false })}
+            />
+          </Form.Group>
           {/* START DATE  */}
-          <input
-            name="startdate"
-            type="date"
-            ref={register({ required: true })}
-            className={errors.startdate ? "error" : ""}
-          />
-          {/* errors will return when field validation fails  */}
-          {errors.startdate &&
-            errorMessage({
-              type: errors?.startdate?.type,
-            })}
+          <Form.Group id="startDate">
+            <Form.Label>Select the date</Form.Label>
 
-          {/* END DATE  */}
-          <input
-            name="enddate"
-            type="date"
-            ref={register({ required: true })}
-            className={errors.enddate ? "error" : ""}
-          />
-          {/* errors will return when field validation fails  */}
-          {errors.enddate &&
-            errorMessage({
-              type: errors?.enddate?.type,
-            })}
+            <Form.Control
+              name="startdate"
+              type="date"
+              ref={register({ required: false })}
+              className={errors.startdate ? "error" : ""}
+            />
+            {/* errors will return when field validation fails  */}
+            {errors.startdate &&
+              errorMessage({
+                type: errors?.startdate?.type,
+              })}
+          </Form.Group>
 
           {/* START TIME  */}
-          <input
-            name="starttime"
-            type="time"
-            ref={register({ required: true })}
-            className={errors.starttime ? "error" : ""}
-          />
-          {/* errors will return when field validation fails  */}
-          {errors.starttime &&
-            errorMessage({
-              type: errors?.starttime?.type,
-            })}
-
-          {/* END TIME  */}
-          <input
-            name="endtime"
-            type="time"
-            ref={register({ required: true })}
-            className={errors.endtime ? "error" : ""}
-          />
-          {/* errors will return when field validation fails  */}
-          {errors.endtime &&
-            errorMessage({
-              type: errors?.endtime?.type,
-            })}
-
+          <Form.Group>
+            <Form.Label>Select the time</Form.Label>
+            <Form.Control
+              name="starttime"
+              type="time"
+              ref={register({ required: false })}
+              className={errors.starttime ? "error" : ""}
+            />
+            {/* errors will return when field validation fails  */}
+            {errors.starttime &&
+              errorMessage({
+                type: errors?.starttime?.type,
+              })}
+          </Form.Group>
           <Button type="submit"> Submit </Button>
         </Form>
-      </Wrapper>
 
-      <AllTasks
-        taskList={taskList}
-        filteredTasks={filteredTasks}
-        setFilteredTasks={setFilteredTasks}
-      />
+        <AllTasks
+          taskList={taskList}
+          filteredTasks={filteredTasks}
+          setFilteredTasks={setFilteredTasks}
+        />
+      </Wrapper>
     </>
   );
 };
