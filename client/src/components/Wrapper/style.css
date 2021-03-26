@@ -1,4 +1,8 @@
 .wrapper {
   min-height: 100%;
-  padding: 20px;
+  padding: 1rem;
+  margin-bottom: 2rem;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 4rem;
 }

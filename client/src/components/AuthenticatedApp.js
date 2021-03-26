@@ -11,6 +11,7 @@ const AuthenticatedApp = () => {
         <Route exact path="/" component={PostTaskPage} />
         <Route exact path="/gettask" component={GetTaskPage} />
         <Route exact path="/addtask" component={PostTaskPage} />
+        <Route exact path="/start" component={Start} />
       </Switch>
     </Router>
     //     <p>You are logged in</p>
