@@ -4,7 +4,7 @@ const router = require("express").Router();
 router
   .route("/")
   .post(Task.addTask)
-  // .get(Task)
+  .get(Task.findAllTasks)
 
 router
   .route("/:id")
