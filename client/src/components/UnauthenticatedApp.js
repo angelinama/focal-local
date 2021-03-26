@@ -1,14 +1,41 @@
 import React, { useRef } from "react";
 import { Form, Button } from "react-bootstrap";
+import axios from "axios";
+import { useGlobalContext } from "../context/GlobalState";
 
 const UnauthenticatedApp = () => {
-  const handleLogin = (event) => {
-    event.preventDefault();
-  };
-
   const emailRef = useRef();
   const passwordRef = useRef();
   const phoneRef = useRef();
+
+  //Get the context reducer
+  const [state, dispatch] = useGlobalContext();
+
+  const handleLogin = async (event) => {
+    event.preventDefault();
+    const inputs = {
+      email: emailRef.current.value,
+      password: passwordRef.current.value,
+      phone: phoneRef.current.value,
+    };
+    // console.log(inputs);
+    //send axios request to /auth/login
+    const {
+      data: { email, token },
+    } = await axios.post("/auth/login", inputs);
+    localStorage.setItem(
+      "userInfo",
+      JSON.stringify({
+        email,
+        token,
+      })
+    );
+    dispatch({
+      type: "LOGIN",
+      email,
+      token,
+    });
+  };
 
   //TODO make two components for both login and signup
   return (

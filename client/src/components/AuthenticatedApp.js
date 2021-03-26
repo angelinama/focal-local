@@ -8,11 +8,12 @@ const AuthenticatedApp = () => {
   return (
     <Router>
       <Switch>
-        <Route exact path="/" component={Start} />
+        <Route exact path="/" component={PostTaskPage} />
         <Route exact path="/gettask" component={GetTaskPage} />
         <Route exact path="/addtask" component={PostTaskPage} />
       </Switch>
     </Router>
+    //     <p>You are logged in</p>
   );
 };
 
