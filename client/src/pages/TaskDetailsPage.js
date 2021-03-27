@@ -5,7 +5,6 @@ import { useGlobalContext } from "../context/GlobalState";
 import TaskCard from "../components/TaskCard";
 import Wrapper from "../components/Wrapper";
 import Button from "react-bootstrap/Button";
-import Spinner from "react-bootstrap/Spinner";
 
 const TaskDetailsPage = () => {
   //Attach authentication token to api request
@@ -42,14 +41,25 @@ const TaskDetailsPage = () => {
   if (!task && !user) {
     return "Loading...";
   }
-  console.log(user)
+  console.log(user);
+
+  const handleClick = ()=>{
+    axios
+      .get(`/api/task/assignTask/${id}`)
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((error) => console.log(error));
+  }
+
 
   return (
     <>
       <Wrapper>
         <h1>*** Task Details Page ***</h1>
         <TaskCard task={task} postedBy={user?.email}/>
-        <Button>GET THE TASK</Button>
+
+        <Button onClick={handleClick}>GET THE TASK</Button>
         <Button href={`mailto: ${user?.email}`}>ASK A QUESTION</Button>
       </Wrapper>
     </>
