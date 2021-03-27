@@ -36,6 +36,8 @@ const PostTaskPage = () => {
     );
     console.log(endMoment.toISOString());
 
+    data.email = JSON.parse(localStorage.getItem("userInfo")).email;
+
     //api call
     axios.post("/api/task", data);
   };
