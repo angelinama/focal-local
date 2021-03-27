@@ -14,7 +14,7 @@ function NavTabs() {
             alt=""
             width="181"
             height="50"
-            class="d-inline-block align-text-top"
+            className="d-inline-block align-text-top"
           />
       </Link>
       <button
