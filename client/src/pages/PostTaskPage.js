@@ -1,5 +1,5 @@
-import React from "react";
-import { Form, Button, InputGroup } from "react-bootstrap";
+import React, { useState, useRef } from "react";
+import { Form, Button, InputGroup, Overlay, Tooltip } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import moment from "moment";
 import Wrapper from "../components/Wrapper";
@@ -26,6 +26,9 @@ const PostTaskPage = () => {
     ] = `Bearer ${state.userToken}`;
   }
   const { register, handleSubmit, watch, errors } = useForm();
+
+  const [show, setShow] = useState(false);
+  const target = useRef(null);
 
   const onSubmit = (data) => {
     console.log(data);
@@ -104,18 +107,18 @@ const PostTaskPage = () => {
           <Form.Group controlId="formPayRate">
             <Form.Label>How much will you pay?</Form.Label>
             <InputGroup className="mb-3">
-            <InputGroup.Prepend>
-              <InputGroup.Text>$</InputGroup.Text>
-            </InputGroup.Prepend>
-            <Form.Control
-              aria-label="Amount (to the nearest dollar)"
-              name="payrate"
-              ref={register({ required: true })}
-              className={errors.payrate ? "error" : ""}
-            />
-            <InputGroup.Append>
-              <InputGroup.Text>.00</InputGroup.Text>
-            </InputGroup.Append>
+              <InputGroup.Prepend>
+                <InputGroup.Text>$</InputGroup.Text>
+              </InputGroup.Prepend>
+              <Form.Control
+                aria-label="Amount (to the nearest dollar)"
+                name="payrate"
+                ref={register({ required: true })}
+                className={errors.payrate ? "error" : ""}
+              />
+              <InputGroup.Append>
+                <InputGroup.Text>.00</InputGroup.Text>
+              </InputGroup.Append>
             </InputGroup>
             {/* errors will return when field validation fails  */}
             {errors.payrate &&
@@ -180,7 +183,19 @@ const PostTaskPage = () => {
                 type: errors?.endtime?.type,
               })}
           </Form.Group>
-          <Button type="submit"> Submit </Button>
+          <Button type="submit" ref={target} onClick={() => setShow(!show)}>
+            {" "}
+            Submit{" "}
+          </Button>
+          {/* --- */}
+          <Overlay target={target.current} show={show} placement="right">
+            {(props) => (
+              <Tooltip id="overlay-example" {...props}>
+                Task Saved! 
+              </Tooltip>
+            )}
+          </Overlay>
+          {/* --- */}
         </Form>
       </Wrapper>
     </>
