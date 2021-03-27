@@ -28,6 +28,18 @@ const userSchema = new Schema({
     trim: true,
     unique: true,
   },
+  taskspost: [
+    {
+      type: Schema.Types.ObjectID,
+      ref: "Task",
+    },
+  ],
+  tasksget: [
+    {
+      type: Schema.Types.ObjectID,
+      ref: "Task",
+    },
+  ],
 });
 
 //TODO add crypto for password

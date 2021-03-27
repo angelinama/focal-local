@@ -2,6 +2,8 @@ import React, { useRef, useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import axios from "axios";
 import { useGlobalContext } from "../context/GlobalState";
+import NavBar from "./NavBar";
+import Wrapper from "./Wrapper";
 
 const UnauthenticatedApp = () => {
   const [isRegister, setIsRegister] = useState(false); //state to keep track of login or register
