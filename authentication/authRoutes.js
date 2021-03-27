@@ -46,7 +46,6 @@ Router.post("/register", async (req, res) => {
     res.json("Succefully registered");
   } catch (err) {
     //TODO check if err is caused by duplicate email, i.e. Mongodb error
-    //TODO redirect to login page
     res.json({
       err: err,
       message:
