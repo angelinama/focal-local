@@ -9,13 +9,13 @@ function NavTabs() {
   return (
     <>
       <Link className="navbar-brand nav-text" to="/">
-          <img
-            src="logo400.png"
-            alt=""
-            width="181"
-            height="50"
-            class="d-inline-block align-text-top"
-          />
+        <img
+          src="logo400.png"
+          alt=""
+          width="181"
+          height="50"
+          className="d-inline-block align-text-top"
+        />
       </Link>
       <button
         className="navbar-toggler ml-auto"
@@ -58,8 +58,8 @@ function NavTabs() {
               Get A Task
             </Link>
           </li>
-        {/* ----START MY BOARD PAGE---- */}
-        <li className="nav-item">
+          {/* ----START MY BOARD PAGE---- */}
+          <li className="nav-item">
             <Link
               to="/myboard"
               className={
@@ -71,7 +71,7 @@ function NavTabs() {
               My Board
             </Link>
           </li>
-        {/* ----END MY BOARD PAGE---- */}
+          {/* ----END MY BOARD PAGE---- */}
         </ul>
       </div>
     </>
