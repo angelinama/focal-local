@@ -52,12 +52,11 @@ const TaskDetailsPage = () => {
       .catch((error) => console.log(error));
   }
 
-
   return (
     <>
       <Wrapper>
         <h1>*** Task Details Page ***</h1>
-        <TaskCard task={task} postedBy={user?.email}/>
+        <TaskCard task={task} postedBy={user?.userName}/>
 
         <Button onClick={handleClick}>GET THE TASK</Button>
         <Button href={`mailto: ${user?.email}`}>ASK A QUESTION</Button>
