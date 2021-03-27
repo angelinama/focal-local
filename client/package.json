@@ -21,6 +21,7 @@
     "react-hook-form": "^6.15.5",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
+    "react-tsparticles": "^1.24.2",
     "web-vitals": "^1.1.1"
   },
   "scripts": {

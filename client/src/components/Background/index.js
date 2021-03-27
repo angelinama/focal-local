@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Particles from "react-tsparticles";
-import "style.css";
+import "./style.css";
 
 class Background extends Component {
   constructor(props) {
