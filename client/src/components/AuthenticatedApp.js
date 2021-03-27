@@ -27,7 +27,7 @@ const AuthenticatedApp = () => {
           <Route exact path="/" component={PostTaskPage} />
           <Route exact path="/gettask" component={GetTaskPage} />
           <Route exact path="/addtask" component={PostTaskPage} />
-          <Route exact path="/details" component={TaskDetailsPage} />
+          <Route exact path="/details/:id" component={TaskDetailsPage} />
         </Switch>
 
       </Router>
