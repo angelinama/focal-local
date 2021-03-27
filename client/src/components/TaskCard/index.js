@@ -1,7 +1,8 @@
 import React from "react";
 import Card from "react-bootstrap/Card";
+import { LinkContainer } from "react-router-bootstrap";
 
-const TaskCard = ({task}) => {
+const TaskCard = ({ task }) => {
   return (
     <div>
       <Card style={{ width: "18rem" }}>
@@ -14,7 +15,13 @@ const TaskCard = ({task}) => {
             Some quick example text to build on the card title and make up the
             bulk of the card's content.
           </Card.Text>
-          <Card.Link href="#">Card Link</Card.Link>
+
+          <LinkContainer to={`/details/${task._id}`}>
+          <Card.Link>
+            Details
+          </Card.Link>
+          </LinkContainer>
+
           <Card.Link href="#">Another Link</Card.Link>
         </Card.Body>
       </Card>

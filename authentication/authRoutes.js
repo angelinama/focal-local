@@ -12,16 +12,18 @@ Router.post("/login", (req, res, next) => {
     (err, user, additionalMessage) => {
       if (err || !user) {
         //TODO should I do anything else when there is an incorrect email???
-        return res
-          .status(400)
-          .json({ message: additionalMessage, error: err, user: user });
+        return res.status(400).json({
+          message: additionalMessage,
+          error: err,
+          email: user.email,
+          token: undefined,
+        });
       }
 
       req.login(user, { session: false }, (err) => {
         if (err) {
           res.status(500).send(err);
         }
-        //TODO when successfully logged in, redirect page
         const token = jwt.sign(
           { id: user._id, email: user.email },
           process.env.PASSPORT_SECRET
@@ -41,12 +43,12 @@ Router.post("/register", async (req, res) => {
   //create a new user in the database from the request
   try {
     const user = await db.User.create(req.body);
-    // res.json(user);
-    //redirect to welcome page
-    res.json("Succefully registered");
+    res.json({
+      message: `${req.body.email} has succefully registered`,
+      user: user,
+    });
   } catch (err) {
     //TODO check if err is caused by duplicate email, i.e. Mongodb error
-    //TODO redirect to login page
     res.json({
       err: err,
       message:

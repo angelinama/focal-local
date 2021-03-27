@@ -2,10 +2,9 @@ import React from "react";
 import { Form, Button } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import moment from "moment";
-import NavTabs from "../components/NavTabs";
-import NavBar from "../components/NavBar";
 import Wrapper from "../components/Wrapper";
 import axios from "axios";
+import { useGlobalContext } from "../context/GlobalState";
 
 const options = ["Home repairs", "Shopping", "Baby sitting", "Pet sitting"];
 
@@ -19,6 +18,13 @@ const errorMessage = ({ type, minLength = 0, maxLength = 0 }) => {
 };
 
 const PostTaskPage = () => {
+  //Attach authentication token to api request
+  const [state] = useGlobalContext();
+  if (state.userToken) {
+    axios.defaults.headers.common[
+      "Authorization"
+    ] = `Bearer ${state.userToken}`;
+  }
   const { register, handleSubmit, watch, errors } = useForm();
 
   const onSubmit = (data) => {
@@ -46,9 +52,6 @@ const PostTaskPage = () => {
 
   return (
     <>
-      <NavBar>
-        <NavTabs />
-      </NavBar>
       <Wrapper>
         <h1>***POST A TASK PAGE***</h1>
         {/* "handleSubmit" will validate your inputs before invoking "onSubmit" */}
