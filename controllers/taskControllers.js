@@ -12,7 +12,10 @@ const addTask = async (req, res) => {
     enddate,
   } = req.body;
   try {
+    const posterId = req.user._id;
+
     const task = await Task.create({
+      posterId,
       category,
       title,
       description,
@@ -26,10 +29,11 @@ const addTask = async (req, res) => {
       { email: req.body.email },
       {
         $push: {
-            taskspost: task._id
-      }},
-      {new: true}
-    )
+          taskspost: task._id,
+        },
+      },
+      { new: true }
+    );
 
     if (task) {
       res.status(201).json({
@@ -89,5 +93,5 @@ const findAllTasks = async (req, res) => {
 module.exports = {
   addTask,
   findTask,
-  findAllTasks
+  findAllTasks,
 };

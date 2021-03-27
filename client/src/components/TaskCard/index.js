@@ -2,7 +2,7 @@ import React from "react";
 import Card from "react-bootstrap/Card";
 import { LinkContainer } from "react-router-bootstrap";
 
-const TaskCard = ({ task }) => {
+const TaskCard = ({ task, postedBy }) => {
   return (
     <div>
       <Card style={{ width: "18rem" }}>
@@ -15,13 +15,16 @@ const TaskCard = ({ task }) => {
           {task.description}
           </Card.Text>
 
-          <LinkContainer to={`/details/${task._id}`}>
+          {postedBy && <p>Posted by {postedBy}</p>}
+
+          {!postedBy && <LinkContainer to={`/details/${task._id}`}>
           <Card.Link>
             Details
           </Card.Link>
-          </LinkContainer>
+          </LinkContainer>}
 
-          <Card.Link href="#">Another Link</Card.Link>
+
+          
         </Card.Body>
       </Card>
     </div>

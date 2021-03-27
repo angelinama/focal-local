@@ -4,8 +4,8 @@ import axios from "axios";
 import { useGlobalContext } from "../context/GlobalState";
 import TaskCard from "../components/TaskCard";
 import Wrapper from "../components/Wrapper";
-import  Button from "react-bootstrap/Button";
-
+import Button from "react-bootstrap/Button";
+import Spinner from "react-bootstrap/Spinner";
 
 const TaskDetailsPage = () => {
   //Attach authentication token to api request
@@ -19,25 +19,38 @@ const TaskDetailsPage = () => {
   const { id } = useParams();
   console.log(id);
   const [task, setTask] = useState(null);
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
     axios
       .get(`/api/task/${id}`)
-      .then((res) => setTask(res.data))
+      .then((res) => {
+        setTask(res.data);
+
+        console.log(res.data);
+        axios
+          .get(`/api/user/${res.data.posterId}`)
+          .then((res) => {
+            console.log({ user: res });
+            setUser(res.data);
+          })
+          .catch((error) => console.log(error));
+      })
       .catch((error) => console.log(error));
   }, [id]);
 
-  if (!task) {
+  if (!task && !user) {
     return "Loading...";
   }
+  console.log(user)
 
   return (
     <>
       <Wrapper>
         <h1>*** Task Details Page ***</h1>
-        <TaskCard task={task} />
+        <TaskCard task={task} postedBy={user?.email}/>
         <Button>GET THE TASK</Button>
-        <Button>ASK A QUESTION</Button>
+        <Button href={`mailto: ${user?.email}`}>ASK A QUESTION</Button>
       </Wrapper>
     </>
   );
