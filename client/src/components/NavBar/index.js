@@ -7,9 +7,7 @@ function NavTabs() {
   const [show, setShow] = React.useState(false);
 
   return (
-    <nav
-      className="navbar navbar-expand-md navbar-dark justify-content-between"
-    >
+    <nav className="navbar navbar-expand-md navbar-dark justify-content-between">
       <Link className="navbar-brand nav-text" to="/">
         Focal Local
       </Link>
@@ -47,7 +45,9 @@ function NavTabs() {
             <Link
               to="/gettask"
               className={
-                location.pathname === "/gettask" ? "nav-link active" : "nav-link"
+                location.pathname === "/gettask"
+                  ? "nav-link active"
+                  : "nav-link"
               }
             >
               Get A Task

@@ -16,10 +16,17 @@ const userSchema = new Schema({
   },
   password: {
     type: String,
-    required: true,
+    required: "password is required",
   },
   phone: {
     type: String,
+    trim: true,
+  },
+  userName: {
+    type: String,
+    required: "userName is required",
+    trim: true,
+    unique: true,
   },
 });
 

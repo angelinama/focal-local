@@ -8,14 +8,12 @@ const passport = require("../authentication/strategy");
 router.use("/auth", authRoutes);
 
 // Define API routes here
-// router.use("/api", passport.authenticate("jwt", { session: false }), apiRoutes);
-router.use("/api", apiRoutes);
+router.use("/api", passport.authenticate("jwt", { session: false }), apiRoutes);
 
 // Send every other request to the React app
 router.get("*", (req, res) => {
-  //TODO  error from postman build folder does not exist
+  //this route shoule not be authenticated otherwise it will protect the whole react pages including login and signup
   res.sendFile(path.join(__dirname, "../../client/build/index.html"));
-  // res.json("protected route");
 });
 
 module.exports = router;

@@ -7,9 +7,10 @@ const UnauthenticatedApp = () => {
   const emailRef = useRef();
   const passwordRef = useRef();
   const phoneRef = useRef();
+  const userNameRef = useRef();
 
   //Get the context reducer
-  const [state, dispatch] = useGlobalContext();
+  const [, dispatch] = useGlobalContext();
 
   const handleLogin = async (event) => {
     event.preventDefault();
@@ -17,6 +18,7 @@ const UnauthenticatedApp = () => {
       email: emailRef.current.value,
       password: passwordRef.current.value,
       phone: phoneRef.current.value,
+      userName: userNameRef.current.value,
     };
     // console.log(inputs);
     //send axios request to /auth/login
@@ -52,6 +54,7 @@ const UnauthenticatedApp = () => {
           We'll never share your email with anyone else.
         </Form.Text>
       </Form.Group>
+      {/* TODO only render phone and username during signup but not during login */}
       <Form.Group controlId="formBasicPhone">
         <Form.Label>Phone number (optional)</Form.Label>
         <Form.Control
@@ -59,6 +62,15 @@ const UnauthenticatedApp = () => {
           name="phone"
           placeholder="123-456-7890"
           ref={phoneRef}
+        />
+      </Form.Group>
+      <Form.Group controlId="formBasicUserName">
+        <Form.Label>Username</Form.Label>
+        <Form.Control
+          type="text"
+          name="userName"
+          placeholder="contains only letters and numbers"
+          ref={userNameRef}
         />
       </Form.Group>
       <Form.Group controlId="formBasicPassword">
