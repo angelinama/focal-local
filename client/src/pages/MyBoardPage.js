@@ -43,9 +43,9 @@ const MyBoardPage = () => {
     <div>
       <h1>*** My Board Page ***</h1>
       <h2>My Tasks</h2>
-      <AllTasks filteredTasks={myTasks}/>
-      <h2>My Requests</h2>
       <AllTasks filteredTasks={myAssignments}/>
+      <h2>My Requests</h2>
+      <AllTasks filteredTasks={myTasks}/>
     </div>
   )
 }
