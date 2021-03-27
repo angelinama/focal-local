@@ -91,10 +91,11 @@ const findAllTasks = async (req, res) => {
 
 const assignTask = async (req, res) => {
   try {
+    const { id } = req.params;
     const found = await Task.findOneAndUpdate(
-      { id: req.body.id },
+      { _id: id },
       { getterId: req.user.id },
-      { new: true }
+      { new: true, useFindAndModify: false }
     );
     if (!found) {
       return res.status(404).json({
@@ -111,8 +112,9 @@ const assignTask = async (req, res) => {
 };
 
 const findAllTasksPostedByMe = async (req, res) => {
+  console.log("heeeeyyyyy")
   try {
-    const found = await Task.find({posterId: req.user.id});
+    const found = await Task.find({ posterId: req.user.id });
     if (!found) {
       return res.status(404).json({
         message: "No tasks found",
@@ -129,7 +131,7 @@ const findAllTasksPostedByMe = async (req, res) => {
 
 const findAllTasksAssignedToMe = async (req, res) => {
   try {
-    const found = await Task.find({getterId: req.user.id});
+    const found = await Task.find({ getterId: req.user.id });
     if (!found) {
       return res.status(404).json({
         message: "No tasks found",

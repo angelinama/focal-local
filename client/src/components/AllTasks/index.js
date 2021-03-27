@@ -1,8 +1,7 @@
 import React from "react";
 import TaskCard from "../TaskCard";
 
-const AllTasks = ({ filteredTasks, taskList, setFilteredTasks }) => {
-  console.log({ taskList, filteredTasks });
+const AllTasks = ({ filteredTasks }) => {
   return (
     <div>
       {filteredTasks.map((task) => {
