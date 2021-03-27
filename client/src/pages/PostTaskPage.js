@@ -5,6 +5,7 @@ import moment from "moment";
 import NavTabs from "../components/NavBar";
 import Wrapper from "../components/Wrapper";
 import axios from "axios";
+import { useGlobalContext } from "../context/GlobalState";
 
 const options = ["Home repairs", "Shopping", "Baby sitting", "Pet sitting"];
 
@@ -18,6 +19,13 @@ const errorMessage = ({ type, minLength = 0, maxLength = 0 }) => {
 };
 
 const PostTaskPage = () => {
+  //Attach authentication token to api request
+  const [state] = useGlobalContext();
+  if (state.userToken) {
+    axios.defaults.headers.common[
+      "Authorization"
+    ] = `Bearer ${state.userToken}`;
+  }
   const { register, handleSubmit, watch, errors } = useForm();
 
   const onSubmit = (data) => {

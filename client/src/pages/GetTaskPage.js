@@ -5,6 +5,7 @@ import { Form, Button } from "react-bootstrap";
 import Wrapper from "../components/Wrapper";
 import axios from "axios";
 import AllTasks from "../components/AllTasks";
+import { useGlobalContext } from "../context/GlobalState";
 
 const options = ["Home repairs", "Shopping", "Baby sitting", "Pet sitting"];
 
@@ -23,6 +24,14 @@ const GetTaskPage = () => {
   const [taskList, setTaskList] = useState([]);
   const [filteredTasks, setFilteredTasks] = useState([]);
 
+  //Attach authentication token to api request
+  const [state] = useGlobalContext();
+  if (state.userToken) {
+    axios.defaults.headers.common[
+      "Authorization"
+    ] = `Bearer ${state.userToken}`;
+  }
+
   useEffect(() => {
     axios
       .get("/api/task")
@@ -38,13 +47,15 @@ const GetTaskPage = () => {
   }, []);
 
   const onSubmit = (data) => {
-    console.log({data});
-    let results = taskList.filter((task) => {
-      console.log({task: task.category, data: data.category});
-      return data.category.includes(task.category);
-    }).filter((task)=>{
-      return data.volunteer ? task.payrate === 0 : true;
-    });
+    console.log({ data });
+    let results = taskList
+      .filter((task) => {
+        console.log({ task: task.category, data: data.category });
+        return data.category.includes(task.category);
+      })
+      .filter((task) => {
+        return data.volunteer ? task.payrate === 0 : true;
+      });
 
     setFilteredTasks(results);
   };
@@ -70,11 +81,11 @@ const GetTaskPage = () => {
           </Form.Group>
           {/* ONLY VOLUNTEERS? */}
           <Form.Group id="formGridCheckbox">
-            <Form.Check 
-            name="volunteer"
-            type="checkbox" 
-            label="Find only volunteer tasks"
-            ref={register({ required: false })}
+            <Form.Check
+              name="volunteer"
+              type="checkbox"
+              label="Find only volunteer tasks"
+              ref={register({ required: false })}
             />
           </Form.Group>
           {/* START DATE  */}
