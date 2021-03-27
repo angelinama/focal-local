@@ -6,7 +6,7 @@ const TaskSchema = mongoose.Schema({
     type: Schema.Types.ObjectId,
     ref: "User",
   },
-  finderId: {
+  getterId: {
     type: Schema.Types.ObjectId,
     ref: "User",
   },
