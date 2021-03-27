@@ -27,6 +27,7 @@ const AuthenticatedApp = () => {
           <NavTabs />
         </NavBar>
         <Switch>
+          {/* TODO change path "/" to welcome page once we build that */}
           <Route exact path="/" component={PostTaskPage} />
           <Route exact path="/gettask" component={GetTaskPage} />
           <Route exact path="/addtask" component={PostTaskPage} />
