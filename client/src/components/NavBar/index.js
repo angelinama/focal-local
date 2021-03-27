@@ -53,6 +53,18 @@ function NavTabs() {
               Get A Task
             </Link>
           </li>
+          <li className="nav-item">
+            <Link
+              to="/details"
+              className={
+                location.pathname === "/details"
+                  ? "nav-link active"
+                  : "nav-link"
+              }
+            >
+              Task Details
+            </Link>
+          </li>
         </ul>
       </div>
     </nav>
