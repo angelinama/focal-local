@@ -1,9 +1,9 @@
 import React from "react";
-import Wrapper from "../components/Wrapper"
-import { Link } from "react-router-dom";
+import Wrapper from "../components/Wrapper";
+
 import "../styles/Start.css";
 
-const Start = () => (
+const Start = (props) => (
   <div className="text-center">
     <Wrapper>
       <h3 className="hello">Easiest way to engage your local community,</h3>
@@ -12,10 +12,13 @@ const Start = () => (
       <h5 className="start">Support small businesses</h5>
       <h5 className="start">Follow up local events</h5>
 
-      <Link to="/sign">
-        <button type="button" className="btn btn-primary start">LOGIN</button>
-      </Link>
-
+      <button
+        type="button"
+        className="btn btn-primary start"
+        onClick={props.switchToLogin}
+      >
+        LOGIN
+      </button>
     </Wrapper>
   </div>
 );
