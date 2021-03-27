@@ -5,6 +5,7 @@ import moment from "moment";
 import NavTabs from "../components/NavBar";
 import Wrapper from "../components/Wrapper";
 import axios from "axios";
+import { useGlobalContext } from "../context/GlobalState";
 
 const options = ["Home repairs", "Shopping", "Baby sitting", "Pet sitting"];
 
@@ -18,6 +19,13 @@ const errorMessage = ({ type, minLength = 0, maxLength = 0 }) => {
 };
 
 const PostTaskPage = () => {
+  //Attach authentication token to api request
+  const [state] = useGlobalContext();
+  if (state.userToken) {
+    axios.defaults.headers.common[
+      "Authorization"
+    ] = `Bearer ${state.userToken}`;
+  }
   const { register, handleSubmit, watch, errors } = useForm();
 
   const onSubmit = (data) => {
@@ -61,107 +69,107 @@ const PostTaskPage = () => {
           </Form.Group>
           {/* TITLE */}
           <Form.Group controlId="formTitle">
-          <Form.Label>Title</Form.Label>
-          <Form.Control
-            name="title"
-            defaultValue=""
-            placeholder="Plant rose gargen"
-            ref={register({ required: true, maxLength: 50, minLength: 8 })}
-            className={errors.title ? "error" : ""}
-          />
-          {errors.title &&
-            errorMessage({
-              type: errors?.title?.type,
-              minLength: 8,
-              maxLength: 50,
-            })}
+            <Form.Label>Title</Form.Label>
+            <Form.Control
+              name="title"
+              defaultValue=""
+              placeholder="Plant rose gargen"
+              ref={register({ required: true, maxLength: 50, minLength: 8 })}
+              className={errors.title ? "error" : ""}
+            />
+            {errors.title &&
+              errorMessage({
+                type: errors?.title?.type,
+                minLength: 8,
+                maxLength: 50,
+              })}
           </Form.Group>
           {/* DESCRIPTION  */}
           <Form.Group controlId="formDescription">
-          <Form.Label>Description</Form.Label>
-          <Form.Control
-            name="description"
-            ref={register({ required: true, maxLength: 250, minLength: 20 })}
-            className={errors.description ? "error" : ""}
-          />
-          {/* errors will return when field validation fails  */}
-          {errors.description &&
-            errorMessage({
-              type: errors?.description?.type,
-              minLength: 20,
-              maxLength: 250,
-            })}
+            <Form.Label>Description</Form.Label>
+            <Form.Control
+              name="description"
+              ref={register({ required: true, maxLength: 250, minLength: 20 })}
+              className={errors.description ? "error" : ""}
+            />
+            {/* errors will return when field validation fails  */}
+            {errors.description &&
+              errorMessage({
+                type: errors?.description?.type,
+                minLength: 20,
+                maxLength: 250,
+              })}
           </Form.Group>
           {/* PAY RATE  */}
           <Form.Group controlId="formPayRate">
-          <Form.Label>How much will you pay?</Form.Label>
-          <Form.Control
-            name="payrate"
-            ref={register({ required: true })}
-            className={errors.payrate ? "error" : ""}
-          />
-          {/* errors will return when field validation fails  */}
-          {errors.payrate &&
-            errorMessage({
-              type: errors?.payrate?.type,
-            })}
+            <Form.Label>How much will you pay?</Form.Label>
+            <Form.Control
+              name="payrate"
+              ref={register({ required: true })}
+              className={errors.payrate ? "error" : ""}
+            />
+            {/* errors will return when field validation fails  */}
+            {errors.payrate &&
+              errorMessage({
+                type: errors?.payrate?.type,
+              })}
           </Form.Group>
           {/* START DATE  */}
           <Form.Group controlId="formStartDate">
-          <Form.Label>Start Date</Form.Label>
-          <Form.Control
-            name="startdate"
-            type="date"
-            ref={register({ required: true })}
-            className={errors.startdate ? "error" : ""}
-          />
-          {/* errors will return when field validation fails  */}
-          {errors.startdate &&
-            errorMessage({
-              type: errors?.startdate?.type,
-            })}
-          {/* END DATE  */}
-          <Form.Label>End Date</Form.Label>
-          <Form.Control
-            name="enddate"
-            type="date"
-            ref={register({ required: false })}
-            className={errors.enddate ? "error" : ""}
-          />
-          {/* errors will return when field validation fails  */}
-          {errors.enddate &&
-            errorMessage({
-              type: errors?.enddate?.type,
-            })}
+            <Form.Label>Start Date</Form.Label>
+            <Form.Control
+              name="startdate"
+              type="date"
+              ref={register({ required: true })}
+              className={errors.startdate ? "error" : ""}
+            />
+            {/* errors will return when field validation fails  */}
+            {errors.startdate &&
+              errorMessage({
+                type: errors?.startdate?.type,
+              })}
+            {/* END DATE  */}
+            <Form.Label>End Date</Form.Label>
+            <Form.Control
+              name="enddate"
+              type="date"
+              ref={register({ required: false })}
+              className={errors.enddate ? "error" : ""}
+            />
+            {/* errors will return when field validation fails  */}
+            {errors.enddate &&
+              errorMessage({
+                type: errors?.enddate?.type,
+              })}
           </Form.Group>
           {/* START TIME  */}
           <Form.Group controlId="formStartDate">
-          <Form.Label>Start Time</Form.Label>
-          <Form.Control
-            name="starttime"
-            type="time"
-            ref={register({ required: true })}
-            className={errors.starttime ? "error" : ""}
-          />
-          {/* errors will return when field validation fails  */}
-          {errors.starttime &&
-            errorMessage({
-              type: errors?.starttime?.type,
-            })}
+            <Form.Label>Start Time</Form.Label>
+            <Form.Control
+              name="starttime"
+              type="time"
+              ref={register({ required: true })}
+              className={errors.starttime ? "error" : ""}
+            />
+            {/* errors will return when field validation fails  */}
+            {errors.starttime &&
+              errorMessage({
+                type: errors?.starttime?.type,
+              })}
 
-          {/* END TIME  */}
-          <Form.Label>End Time</Form.Label>
-          <Form.Control
-            name="endtime"
-            type="time"
-            ref={register({ required: false })}
-            className={errors.endtime ? "error" : ""}
-          />
-          {/* errors will return when field validation fails  */}
-          {errors.endtime &&
-            errorMessage({
-              type: errors?.endtime?.type,
-            })}
+            {/* END TIME  */}
+            <Form.Label>End Time</Form.Label>
+            <Form.Control
+              name="endtime"
+              type="time"
+              ref={register({ required: false })}
+              className={errors.endtime ? "error" : ""}
+            />
+            {/* errors will return when field validation fails  */}
+            {errors.endtime &&
+              errorMessage({
+                type: errors?.endtime?.type,
+              })}
           </Form.Group>
           <Button type="submit"> Submit </Button>
         </Form>
