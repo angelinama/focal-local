@@ -5,7 +5,14 @@
 }
 
 .hello {
-  margin-top: 2rem;
   color: #0F8D35;
+  font-weight: bolder;
+}
+
+.startbtn {
+  margin-top: 1rem;
+  background-color: #143A49 !important;
+  border-color: #143A49 !important;
+  width: 200px;
   font-weight: bolder;
 }

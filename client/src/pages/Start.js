@@ -11,11 +11,9 @@ const Start = () => (
       <h5 className="start">Ask local help when you need</h5>
       <h5 className="start">Support small businesses</h5>
       <h5 className="start">Follow up local events</h5>
-
       <Link to="/sign">
-        <button type="button" className="btn btn-primary start">LOGIN</button>
+        <button type="button" className="btn btn-primary startbtn">LOGIN</button>
       </Link>
-
     </Wrapper>
   </div>
 );
