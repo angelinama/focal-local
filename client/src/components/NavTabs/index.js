@@ -12,7 +12,7 @@ function NavTabs() {
           <img
             src="logo400.png"
             alt=""
-            width="145"
+            width="181"
             height="50"
             class="d-inline-block align-text-top"
           />
