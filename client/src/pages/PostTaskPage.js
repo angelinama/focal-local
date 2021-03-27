@@ -2,7 +2,6 @@ import React from "react";
 import { Form, Button } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import moment from "moment";
-import NavTabs from "../components/NavBar";
 import Wrapper from "../components/Wrapper";
 import axios from "axios";
 import { useGlobalContext } from "../context/GlobalState";
@@ -51,7 +50,6 @@ const PostTaskPage = () => {
 
   return (
     <>
-      <NavTabs />
       <Wrapper>
         <h1>***POST A TASK PAGE***</h1>
         {/* "handleSubmit" will validate your inputs before invoking "onSubmit" */}

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import NavTabs from "../components/NavBar";
 import { Form, Button } from "react-bootstrap";
 import Wrapper from "../components/Wrapper";
 import axios from "axios";
@@ -64,7 +63,6 @@ const GetTaskPage = () => {
 
   return (
     <>
-      <NavTabs />
       <Wrapper>
         <h1>***GET A TASK PAGE***</h1>
         <Form onSubmit={handleSubmit(onSubmit)}>
