@@ -21,6 +21,18 @@ const userSchema = new Schema({
   phone: {
     type: String,
   },
+  taskspost: [
+    {
+      type: Schema.Types.ObjectID,
+      ref: "Task",
+    },
+  ],
+  tasksget: [
+    {
+      type: Schema.Types.ObjectID,
+      ref: "Task",
+    },
+  ],
 });
 
 //TODO add crypto for password
