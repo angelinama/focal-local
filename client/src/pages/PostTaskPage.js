@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, Button } from "react-bootstrap";
+import { Form, Button, InputGroup } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import moment from "moment";
 import Wrapper from "../components/Wrapper";
@@ -103,11 +103,20 @@ const PostTaskPage = () => {
           {/* PAY RATE  */}
           <Form.Group controlId="formPayRate">
             <Form.Label>How much will you pay?</Form.Label>
+            <InputGroup className="mb-3">
+            <InputGroup.Prepend>
+              <InputGroup.Text>$</InputGroup.Text>
+            </InputGroup.Prepend>
             <Form.Control
+              aria-label="Amount (to the nearest dollar)"
               name="payrate"
               ref={register({ required: true })}
               className={errors.payrate ? "error" : ""}
             />
+            <InputGroup.Append>
+              <InputGroup.Text>.00</InputGroup.Text>
+            </InputGroup.Append>
+            </InputGroup>
             {/* errors will return when field validation fails  */}
             {errors.payrate &&
               errorMessage({

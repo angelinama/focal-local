@@ -58,6 +58,20 @@ function NavTabs() {
               Get A Task
             </Link>
           </li>
+        {/* ----START MY BOARD PAGE---- */}
+        <li className="nav-item">
+            <Link
+              to="/myboard"
+              className={
+                location.pathname === "/myboard"
+                  ? "nav-link active"
+                  : "nav-link"
+              }
+            >
+              My Board
+            </Link>
+          </li>
+        {/* ----END MY BOARD PAGE---- */}
         </ul>
       </div>
     </>

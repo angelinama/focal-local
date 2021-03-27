@@ -12,7 +12,10 @@ const addTask = async (req, res) => {
     enddate,
   } = req.body;
   try {
+    const posterId = req.user._id;
+
     const task = await Task.create({
+      posterId,
       category,
       title,
       description,
@@ -26,11 +29,11 @@ const addTask = async (req, res) => {
       { email: req.body.email },
       {
         $push: {
-            taskspost: task._id
-      }},
-      {new: true}
-    )
-
+          taskspost: task._id,
+        },
+      },
+      { new: true }
+    );
     if (task) {
       res.status(201).json({
         message: "Post added",
@@ -86,8 +89,66 @@ const findAllTasks = async (req, res) => {
   }
 };
 
+const assignTask = async (req, res) => {
+  try {
+    const found = await Task.findOneAndUpdate(
+      { id: req.body.id },
+      { getterId: req.user.id },
+      { new: true }
+    );
+    if (!found) {
+      return res.status(404).json({
+        message: "No tasks found",
+      });
+    }
+    res.status(200).json(found);
+  } catch (error) {
+    console.error(error);
+    res.status(400).json({
+      message: error.message,
+    });
+  }
+};
+
+const findAllTasksPostedByMe = async (req, res) => {
+  try {
+    const found = await Task.find({posterId: req.user.id});
+    if (!found) {
+      return res.status(404).json({
+        message: "No tasks found",
+      });
+    }
+    res.status(200).json(found);
+  } catch (error) {
+    console.error(error);
+    res.status(400).json({
+      message: error.message,
+    });
+  }
+};
+
+const findAllTasksAssignedToMe = async (req, res) => {
+  try {
+    const found = await Task.find({getterId: req.user.id});
+    if (!found) {
+      return res.status(404).json({
+        message: "No tasks found",
+      });
+    }
+    res.status(200).json(found);
+  } catch (error) {
+    console.error(error);
+    res.status(400).json({
+      message: error.message,
+    });
+  }
+};
+
 module.exports = {
   addTask,
   findTask,
-  findAllTasks
+  findAllTasks,
+  assignTask,
+  findAllTasksPostedByMe,
+  findAllTasksAssignedToMe,
 };
