@@ -12,8 +12,7 @@ const TaskCard = ({ task }) => {
             {task.category}
           </Card.Subtitle>
           <Card.Text>
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
+          {task.description}
           </Card.Text>
 
           <LinkContainer to={`/details/${task._id}`}>

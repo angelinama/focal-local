@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useGlobalContext } from "../context/GlobalState";
 import TaskCard from "../components/TaskCard";
+import Wrapper from "../components/Wrapper";
+import  Button from "react-bootstrap/Button";
 
 
 const TaskDetailsPage = () => {
@@ -25,15 +27,19 @@ const TaskDetailsPage = () => {
       .catch((error) => console.log(error));
   }, [id]);
 
-  if(!task){
+  if (!task) {
     return "Loading...";
   }
 
   return (
-    <div>
-      <h1>*** Details Page ***</h1>
-      <TaskCard task={task}/>
-    </div>
+    <>
+      <Wrapper>
+        <h1>*** Task Details Page ***</h1>
+        <TaskCard task={task} />
+        <Button>GET THE TASK</Button>
+        <Button>ASK A QUESTION</Button>
+      </Wrapper>
+    </>
   );
 };
 
