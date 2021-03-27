@@ -9,7 +9,10 @@ const findUser = async (req, res) => {
         message: "User not found",
       });
     }
-    res.status(200).json({email: found.email});
+    res.status(200).json({
+      email: found.email,
+      userName: found.userName,
+    });
   } catch (error) {
     console.error(error);
     res.status(400).json({
