@@ -44,8 +44,9 @@ const TaskDetailsPage = () => {
   console.log(user);
 
   const handleClick = ()=>{
+    console.log("handleClick", id);
     axios
-      .get(`/api/task/assignTask/${id}`)
+      .post(`/api/task/assignTask/${id}`)
       .then((res) => {
         console.log(res.data);
       })
