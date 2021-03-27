@@ -1,8 +1,8 @@
 const Task = require("../models/task.js");
+const User = require("../models/User.js");
 
 const addTask = async (req, res) => {
   const {
-    userId,
     category,
     title,
     description,
@@ -13,7 +13,6 @@ const addTask = async (req, res) => {
   } = req.body;
   try {
     const task = await Task.create({
-      userId,
       category,
       title,
       description,
@@ -22,6 +21,16 @@ const addTask = async (req, res) => {
       startdate,
       enddate,
     });
+
+    const user = await User.findOneAndUpdate(
+      { email: req.body.email },
+      {
+        $push: {
+            taskspost: task._id
+      }},
+      {new: true}
+    )
+
     if (task) {
       res.status(201).json({
         message: "Post added",

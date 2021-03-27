@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Focal Local",
+  "name": "Focal Local",
   "icons": [
     {
       "src": "favicon.ico",
@@ -8,14 +8,19 @@
       "type": "image/x-icon"
     },
     {
+      "src": "FocalLocal-logo.png",
+      "type": "image/png",
+      "sizes": "295x216"
+    },
+    {
       "src": "logo192.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "logo512.png",
+      "src": "logo400.png",
       "type": "image/png",
-      "sizes": "512x512"
+      "sizes": "1498x216"
     }
   ],
   "start_url": ".",
