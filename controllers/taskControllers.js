@@ -112,7 +112,7 @@ const assignTask = async (req, res) => {
 };
 
 const findAllTasksPostedByMe = async (req, res) => {
-  console.log("heeeeyyyyy")
+  console.log("heeeeyyyyy");
   try {
     const found = await Task.find({ posterId: req.user.id });
     if (!found) {
@@ -146,6 +146,24 @@ const findAllTasksAssignedToMe = async (req, res) => {
   }
 };
 
+const deleteTask = async (req, res) => {
+  try {
+    const found = await Task.find({ getterId: req.user.id });
+    if (!found) {
+      return res.status(404).json({
+        message: "No tasks found",
+      });
+    }
+    await found.delete();
+    res.send("Task Deleted")
+  } catch (error) {
+    console.error(error);
+    res.status(400).json({
+      message: error.message,
+    });
+  }
+};
+
 module.exports = {
   addTask,
   findTask,
@@ -153,4 +171,5 @@ module.exports = {
   assignTask,
   findAllTasksPostedByMe,
   findAllTasksAssignedToMe,
+  deleteTask,
 };
