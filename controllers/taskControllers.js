@@ -74,7 +74,12 @@ const findTask = async (req, res) => {
 
 const findAllTasks = async (req, res) => {
   try {
-    const found = await Task.find({});
+    const found = await Task.find({
+      //find tasks not posted my me
+      posterId: { $ne: req.user.id},
+      //finds tasks not yet taken
+      getterId: null,
+    });
     if (!found) {
       return res.status(404).json({
         message: "No tasks found",
@@ -112,7 +117,6 @@ const assignTask = async (req, res) => {
 };
 
 const findAllTasksPostedByMe = async (req, res) => {
-  console.log("heeeeyyyyy");
   try {
     const found = await Task.find({ posterId: req.user.id });
     if (!found) {

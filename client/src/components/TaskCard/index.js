@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
-import AnimatedCard from "../AnimatedCard"
+// import AnimatedCard from "../AnimatedCard"
 import { LinkContainer } from "react-router-bootstrap";
 import axios from "axios";
 
@@ -26,7 +26,7 @@ const TaskCard = ({ task, postedBy, tasksIPosted }) => {
   return (
     <>
       {hide ? null : (
-        <AnimatedCard>
+        // <AnimatedCard>
           <Card>
             <Card.Body>
               <Card.Title>{task.title}</Card.Title>
@@ -51,7 +51,7 @@ const TaskCard = ({ task, postedBy, tasksIPosted }) => {
               )}
             </Card.Body>
           </Card>
-        </AnimatedCard>
+        // </AnimatedCard>
       )}
     </>
   );

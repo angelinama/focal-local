@@ -112,21 +112,6 @@ const GetTaskPage = () => {
               })}
           </Form.Group>
 
-          {/* START TIME  */}
-          {/* <Form.Group>
-            <Form.Label>Select the time</Form.Label>
-            <Form.Control
-              name="starttime"
-              type="time"
-              ref={register({ required: false })}
-              className={errors.starttime ? "error" : ""} */}
-            {/* /> */}
-            {/* errors will return when field validation fails  */}
-            {/* {errors.starttime &&
-              errorMessage({
-                type: errors?.starttime?.type,
-              })} */}
-          {/* </Form.Group> */}
           <Button type="submit"> Submit </Button>
         </Form>
 
