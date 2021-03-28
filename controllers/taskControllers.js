@@ -23,6 +23,7 @@ const addTask = async (req, res) => {
       payrate,
       startdate,
       enddate,
+      completed: false,
     });
 
     const user = await User.findOneAndUpdate(
@@ -74,12 +75,7 @@ const findTask = async (req, res) => {
 
 const findAllTasks = async (req, res) => {
   try {
-    const found = await Task.find({
-      //find tasks not posted my me
-      posterId: { $ne: req.user.id},
-      //finds tasks not yet taken
-      getterId: null,
-    });
+    const found = await Task.find({completed: false});
     if (!found) {
       return res.status(404).json({
         message: "No tasks found",
@@ -135,7 +131,7 @@ const findAllTasksPostedByMe = async (req, res) => {
 
 const findAllTasksAssignedToMe = async (req, res) => {
   try {
-    const found = await Task.find({ getterId: req.user.id });
+    const found = await Task.find({ getterId: req.user.id});
     if (!found) {
       return res.status(404).json({
         message: "No tasks found",
@@ -158,7 +154,7 @@ const deleteTask = async (req, res) => {
         message: "No tasks deleted",
       });
     }
-    return res.status(200).json({})
+    return res.status(200).json({});
   } catch (error) {
     console.error(error);
     res.status(400).json({
@@ -166,6 +162,60 @@ const deleteTask = async (req, res) => {
     });
   }
 };
+
+const completeTask = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const found = await Task.findOneAndUpdate(
+      { _id: id },
+      { completed: true },
+      { new: true, useFindAndModify: false }
+    );
+    if (!found) {
+      return res.status(404).json({
+        message: "No tasks found",
+      });
+    }
+    res.status(200).json(found);
+  } catch (error) {
+    console.error(error);
+    res.status(400).json({
+      message: error.message,
+    });
+  }
+};
+
+// const completedCategories = async (req, res) => {
+//   try {
+//     res.json({
+//       "Home repairs": await Task.count({
+//         completed: true,
+//         getterId: req.user.id,
+//         category: "Home repairs",
+//       }),
+//       "Shopping": await Task.count({
+//         completed: true,
+//         getterId: req.user.id,
+//         category: "Shopping",
+//       }),
+//       "Baby sitting": await Task.count({
+//         completed: true,
+//         getterId: req.user.id,
+//         category: "Baby sitting",
+//       }),
+//       "Pet sitting": await Task.count({
+//         completed: true,
+//         getterId: req.user.id,
+//         category: "Pet sitting",
+//       }),
+//     });
+//   } catch (error) {
+//     console.error(error);
+//     res.status(400).json({
+//       message: error.message,
+//     });
+//   }
+// };
 
 module.exports = {
   addTask,
@@ -175,4 +225,6 @@ module.exports = {
   findAllTasksPostedByMe,
   findAllTasksAssignedToMe,
   deleteTask,
+  completeTask,
+  // completedCategories,
 };
