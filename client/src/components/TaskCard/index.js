@@ -1,5 +1,6 @@
 import React from "react";
 import Card from "react-bootstrap/Card";
+import AnimatedCard from "../AnimatedCard"
 import { LinkContainer } from "react-router-bootstrap";
 // import moment from "moment";
 
@@ -8,8 +9,8 @@ const TaskCard = ({ task, postedBy }) => {
   date = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
 
   return (
-    <div>
-      <Card style={{ width: "18rem" }}>
+    <AnimatedCard>
+      <Card>
         <Card.Body>
           <Card.Title>{task.title}</Card.Title>
           <Card.Subtitle className="mb-2 text-muted">
@@ -28,7 +29,7 @@ const TaskCard = ({ task, postedBy }) => {
           )}
         </Card.Body>
       </Card>
-    </div>
+    </AnimatedCard>
   );
 };
 

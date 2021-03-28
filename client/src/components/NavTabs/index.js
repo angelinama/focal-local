@@ -9,13 +9,13 @@ function NavTabs() {
   return (
     <>
       <Link className="navbar-brand nav-text" to="/">
-        <img
-          src="logo400.png"
-          alt=""
-          width="181"
-          height="50"
-          className="d-inline-block align-text-top"
-        />
+          <img
+            src="logo400.png"
+            alt="Focal Local"
+            width="181"
+            height="50"
+            className="d-inline-block align-text-top"
+          />
       </Link>
       <button
         className="navbar-toggler ml-auto"
