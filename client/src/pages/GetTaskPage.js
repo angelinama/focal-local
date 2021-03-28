@@ -61,11 +61,10 @@ const GetTaskPage = () => {
         let taskDate = new Date(task.startdate);
         console.log("data ", data);
         console.log("task ", task);
-        console.log("startFilterDate", startFilterDate);
+        console.log({startFilterDate});
         console.log("taskDate: ", taskDate);
         return taskDate.getTime() > startFilterDate.getTime();
       });
-
     setFilteredTasks(results);
   };
 
@@ -120,14 +119,14 @@ const GetTaskPage = () => {
               name="starttime"
               type="time"
               ref={register({ required: false })}
-              className={errors.starttime ? "error" : ""}
-            /> */}
+              className={errors.starttime ? "error" : ""} */}
+            {/* /> */}
             {/* errors will return when field validation fails  */}
             {/* {errors.starttime &&
               errorMessage({
                 type: errors?.starttime?.type,
-              })}
-          </Form.Group> */}
+              })} */}
+          {/* </Form.Group> */}
           <Button type="submit"> Submit </Button>
         </Form>
 

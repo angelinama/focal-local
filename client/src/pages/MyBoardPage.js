@@ -29,7 +29,7 @@ const MyBoardPage = () => {
       axios
       .get("/api/task/myboard/assignedtome")
       .then((response) => {
-        console.log(response.data)
+        console.log(response.data);
         setMyAssignments(response.data);
       })
       .catch((error) => {
@@ -45,7 +45,7 @@ const MyBoardPage = () => {
       <h2>My Tasks</h2>
       <AllTasks filteredTasks={myAssignments}/>
       <h2>My Requests</h2>
-      <AllTasks filteredTasks={myTasks}/>
+      <AllTasks filteredTasks={myTasks} tasksIPosted/>
     </div>
   )
 }

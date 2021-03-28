@@ -1,35 +1,59 @@
-import React from "react";
+import React, { useState } from "react";
 import Card from "react-bootstrap/Card";
+import Button from "react-bootstrap/Button";
 import AnimatedCard from "../AnimatedCard"
 import { LinkContainer } from "react-router-bootstrap";
-// import moment from "moment";
+import axios from "axios";
 
-const TaskCard = ({ task, postedBy }) => {
+const TaskCard = ({ task, postedBy, tasksIPosted }) => {
+  //hook for deleted tasks
+  const [hide, setHide] = useState(false);
+
+  const handleClick = (taskID) => {
+    axios
+      .delete(`/api/task/${taskID}`)
+      .then((res) => {
+        setHide(true);
+        console.log(res.data);
+      })
+      .catch((error) => console.log(error));
+  };
+
   let date = new Date(task.startdate);
-  date = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
+  date =
+    date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
 
   return (
-    <AnimatedCard>
-      <Card>
-        <Card.Body>
-          <Card.Title>{task.title}</Card.Title>
-          <Card.Subtitle className="mb-2 text-muted">
-            {task.category}
-          </Card.Subtitle>
-          <Card.Text>{task.description}</Card.Text>
+    <>
+      {hide ? null : (
+        <AnimatedCard>
+          <Card>
+            <Card.Body>
+              <Card.Title>{task.title}</Card.Title>
+              <Card.Subtitle className="mb-2 text-muted">
+                {task.category}
+              </Card.Subtitle>
+              <Card.Text>{task.description}</Card.Text>
 
-          <Card.Text>{date}</Card.Text>
+              <Card.Text>{date}</Card.Text>
 
-          {postedBy && <p>Posted by {postedBy}</p>}
+              {postedBy && <p>Posted by {postedBy}</p>}
 
-          {!postedBy && (
-            <LinkContainer to={`/details/${task._id}`}>
-              <Card.Link>Details</Card.Link>
-            </LinkContainer>
-          )}
-        </Card.Body>
-      </Card>
-    </AnimatedCard>
+              {!postedBy && (
+                <LinkContainer to={`/details/${task._id}`}>
+                  <Card.Link>Details</Card.Link>
+                </LinkContainer>
+              )}
+              {tasksIPosted && (
+                <Button onClick={() => handleClick(task._id)}>
+                  DELETE TASK
+                </Button>
+              )}
+            </Card.Body>
+          </Card>
+        </AnimatedCard>
+      )}
+    </>
   );
 };
 

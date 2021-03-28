@@ -1,11 +1,11 @@
 import React from "react";
 import TaskCard from "../TaskCard";
 
-const AllTasks = ({ filteredTasks }) => {
+const AllTasks = ({ filteredTasks, tasksIPosted }) => {
   return (
     <div>
       {filteredTasks.map((task) => {
-        return <TaskCard task={task} key={task._id} />;
+        return <TaskCard task={task} key={task._id} tasksIPosted={tasksIPosted}/>;
       })}
     </div>
   );
