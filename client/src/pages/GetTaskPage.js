@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Form, Button } from "react-bootstrap";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 import Wrapper from "../components/Wrapper";
 import axios from "axios";
 import AllTasks from "../components/AllTasks";
 import { useGlobalContext } from "../context/GlobalState";
+import "../styles/GetTask.css";
 
 const options = ["Home repairs", "Shopping", "Baby sitting", "Pet sitting"];
 
@@ -72,49 +76,60 @@ const GetTaskPage = () => {
   console.log({ watch, errors });
 
   return (
-    <>
-      <Wrapper>
-        <h1>***GET A TASK PAGE***</h1>
-        <Form onSubmit={handleSubmit(onSubmit)}>
-          {/* CATEGORY  */}
-          <Form.Group controlId="category">
-            <Form.Label>Choose a category</Form.Label>
-            <Form.Control as="select" multiple name="category" ref={register}>
-              {options.map((value) => (
-                <option key={value} value={value}>
-                  {value}
-                </option>
-              ))}
-            </Form.Control>
-          </Form.Group>
-          {/* ONLY VOLUNTEERS? */}
-          <Form.Group id="formGridCheckbox">
-            <Form.Check
-              name="volunteer"
-              type="checkbox"
-              label="Find only volunteer tasks"
-              ref={register({ required: false })}
-            />
-          </Form.Group>
-          {/* START DATE  */}
-          <Form.Group id="startDate">
-            <Form.Label>Select the date</Form.Label>
+    <Wrapper>
+      <Container fluid>
+        <Row>
+          <Col>
+            <h1 className="display-5 headline">Get a Task</h1>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <Form onSubmit={handleSubmit(onSubmit)}>
+              {/* CATEGORY  */}
+              <Form.Group controlId="category">
+                <Form.Label>Choose a category</Form.Label>
+                <Form.Control
+                  as="select"
+                  multiple
+                  name="category"
+                  ref={register}
+                >
+                  {options.map((value) => (
+                    <option key={value} value={value}>
+                      {value}
+                    </option>
+                  ))}
+                </Form.Control>
+              </Form.Group>
+              {/* ONLY VOLUNTEERS? */}
+              <Form.Group id="formGridCheckbox">
+                <Form.Check
+                  name="volunteer"
+                  type="checkbox"
+                  label="Find only volunteer tasks"
+                  ref={register({ required: false })}
+                />
+              </Form.Group>
+              {/* START DATE  */}
+              <Form.Group id="startDate">
+                <Form.Label>Select the date</Form.Label>
 
-            <Form.Control
-              name="startdate"
-              type="date"
-              ref={register({ required: false })}
-              className={errors.startdate ? "error" : ""}
-            />
-            {/* errors will return when field validation fails  */}
-            {errors.startdate &&
-              errorMessage({
-                type: errors?.startdate?.type,
-              })}
-          </Form.Group>
+                <Form.Control
+                  name="startdate"
+                  type="date"
+                  ref={register({ required: false })}
+                  className={errors.startdate ? "error" : ""}
+                />
+                {/* errors will return when field validation fails  */}
+                {errors.startdate &&
+                  errorMessage({
+                    type: errors?.startdate?.type,
+                  })}
+              </Form.Group>
 
-          {/* START TIME  */}
-          {/* <Form.Group>
+              {/* START TIME  */}
+              {/* <Form.Group>
             <Form.Label>Select the time</Form.Label>
             <Form.Control
               name="starttime"
@@ -122,22 +137,30 @@ const GetTaskPage = () => {
               ref={register({ required: false })}
               className={errors.starttime ? "error" : ""}
             /> */}
-            {/* errors will return when field validation fails  */}
-            {/* {errors.starttime &&
+              {/* errors will return when field validation fails  */}
+              {/* {errors.starttime &&
               errorMessage({
                 type: errors?.starttime?.type,
               })}
           </Form.Group> */}
-          <Button type="submit"> Submit </Button>
-        </Form>
-
-        <AllTasks
-          taskList={taskList}
-          filteredTasks={filteredTasks}
-          setFilteredTasks={setFilteredTasks}
-        />
-      </Wrapper>
-    </>
+              <Button className="gettaskbtn" type="submit">
+                {" "}
+                Submit{" "}
+              </Button>
+            </Form>
+          </Col>
+        </Row>
+        <Row>
+          <Col className="alltaskcol">
+            <AllTasks
+              taskList={taskList}
+              filteredTasks={filteredTasks}
+              setFilteredTasks={setFilteredTasks}
+            />
+          </Col>
+        </Row>
+      </Container>
+    </Wrapper>
   );
 };
 
