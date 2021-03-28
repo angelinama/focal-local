@@ -48,6 +48,7 @@ const PostTaskPage = () => {
       "YYYY-MM-DD HH:mm"
     );
     console.log(endMoment.toISOString());
+    //TODO get email from GlobalState since localStorage is a short-term solution for page refresh
     data.email = JSON.parse(localStorage.getItem("userInfo")).email;
     //api call
     axios
@@ -88,7 +89,7 @@ const PostTaskPage = () => {
             <Form.Control
               name="title"
               defaultValue=""
-              placeholder="Plant rose gargen"
+              placeholder="Plant rose garden"
               ref={register({ required: true, maxLength: 50, minLength: 8 })}
               className={errors.title ? "error" : ""}
             />
@@ -207,7 +208,12 @@ const PostTaskPage = () => {
             </Form.Group>
           </Form.Row>
 
-          <Button className="posttaskbtn" type="submit" ref={target} onClick={() => setShow(!show)}>
+          <Button
+            className="posttaskbtn"
+            type="submit"
+            ref={target}
+            onClick={() => setShow(!show)}
+          >
             {" "}
             Submit{" "}
           </Button>

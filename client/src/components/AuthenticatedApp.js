@@ -7,9 +7,9 @@ import MyBoardPage from "../pages/MyBoardPage";
 import NavTabs from "../components/NavTabs";
 import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
+import EventCalendar from "../pages/EventCalendar";
 
 const AuthenticatedApp = () => {
-
   return (
     <>
       <Router>
@@ -23,6 +23,7 @@ const AuthenticatedApp = () => {
           <Route exact path="/addtask" component={PostTaskPage} />
           <Route exact path="/details/:id" component={TaskDetailsPage} />
           <Route exact path="/myboard" component={MyBoardPage} />
+          <Route exact path="/events" component={EventCalendar} />
         </Switch>
         <Footer />
       </Router>
