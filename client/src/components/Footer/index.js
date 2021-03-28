@@ -2,11 +2,9 @@ import React from "react";
 import "./style.css";
 import { Container, Row, Col } from "react-bootstrap";
 import { useGlobalContext } from "../../context/GlobalState";
-import { Link } from "react-router-dom";
-
+import { Button } from "react-bootstrap";
 
 const Footer = () => {
-
   const [, dispatch] = useGlobalContext();
 
   //handle a logout
@@ -24,9 +22,13 @@ const Footer = () => {
           <Col>
             <ul className="navbar-nav nav-group ml-auto ">
               <li className="nav-item">
-                <Link onClick={handleLogout} className="nav-link">
+                <Button
+                  variant="link"
+                  onClick={handleLogout}
+                  className="nav-link float-right"
+                >
                   Logout
-                </Link>
+                </Button>
               </li>
             </ul>
           </Col>
@@ -34,5 +36,5 @@ const Footer = () => {
       </Container>
     </footer>
   );
-}
+};
 export default Footer;
