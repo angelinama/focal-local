@@ -5,6 +5,7 @@ import Wrapper from "../components/Wrapper";
 import axios from "axios";
 import AllTasks from "../components/AllTasks";
 import { useGlobalContext } from "../context/GlobalState";
+import { isMyTask } from "../utils";
 
 const options = ["Home repairs", "Shopping", "Baby sitting", "Pet sitting"];
 
@@ -35,9 +36,10 @@ const GetTaskPage = () => {
     axios
       .get("/api/task")
       .then((response) => {
+        const othersTasks = response.data.filter((task)=>!isMyTask(task))
         // handle success
-        setTaskList(response.data);
-        setFilteredTasks(response.data);
+        setTaskList(othersTasks);
+        setFilteredTasks(othersTasks);
       })
       .catch((error) => {
         // handle error
