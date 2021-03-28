@@ -17,12 +17,12 @@ function AnimatedCard({ children }) {
   }));
   return (
     <animated.div
-      class="animatedcard"
+      className="animatedcard"
       onMouseMove={({ clientX: x, clientY: y }) => set({ xys: calc(x, y) })}
       onMouseLeave={() => set({ xys: [0, 0, 1] })}
       style={{ transform: props.xys.interpolate(trans) }}
     >
-      { children }
+      {children}
     </animated.div>
   );
 }
