@@ -21,10 +21,10 @@ const Footer = () => {
     <footer>
       <Container className="footer" fluid={true}>
         <Row>
-          <Col xl={12}>
+          <Col>
             <ul className="navbar-nav nav-group ml-auto ">
               <li className="nav-item">
-                <Link onClick={handleLogout} className="nav-link logout">
+                <Link onClick={handleLogout} className="nav-link">
                   Logout
                 </Link>
               </li>
