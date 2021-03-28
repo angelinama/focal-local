@@ -1,0 +1,8 @@
+.posttaskbtn {
+  margin-top: 1rem;
+  background-color: #0F8D35 !important;
+  border-color: #0F8D35 !important;
+  width: 235px;
+  font-weight: bolder;
+  float: right;
+}
