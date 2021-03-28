@@ -31,26 +31,24 @@ const PostTaskPage = () => {
   const target = useRef(null);
 
   const onSubmit = (data) => {
-    console.log(data);
-
+    console.log("submit data: ", data);
+    //convert date into string 
     const startMoment = moment(
       `${data.startdate} ${data.starttime}`,
       "YYYY-MM-DD HH:mm"
     );
     console.log(startMoment.toISOString());
-
     const endMoment = moment(
       `${data.enddate} ${data.endtime}`,
       "YYYY-MM-DD HH:mm"
     );
     console.log(endMoment.toISOString());
-
     data.email = JSON.parse(localStorage.getItem("userInfo")).email;
-
     //api call
     axios.post("/api/task", data);
   };
-
+  //*****end date conversion*******/
+  
   console.log({ watch, errors });
 
   return (

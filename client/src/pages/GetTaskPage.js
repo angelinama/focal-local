@@ -44,16 +44,26 @@ const GetTaskPage = () => {
         console.log(error);
       });
   }, []);
-
+  //FILTER TASKS TO FIND:
   const onSubmit = (data) => {
-    console.log({ data });
+    console.log("logging data ", data);
     let results = taskList
       .filter((task) => {
         console.log({ task: task.category, data: data.category });
+        if (!data.category.length) return true;
         return data.category.includes(task.category);
       })
       .filter((task) => {
         return data.volunteer ? task.payrate === 0 : true;
+      })
+      .filter((task) => {
+        let startFilterDate = new Date(data.startdate);
+        let taskDate = new Date(task.startdate);
+        console.log("data ", data);
+        console.log("task ", task);
+        console.log("startFilterDate", startFilterDate);
+        console.log("taskDate: ", taskDate);
+        return taskDate.getTime() > startFilterDate.getTime();
       });
 
     setFilteredTasks(results);
@@ -104,20 +114,20 @@ const GetTaskPage = () => {
           </Form.Group>
 
           {/* START TIME  */}
-          <Form.Group>
+          {/* <Form.Group>
             <Form.Label>Select the time</Form.Label>
             <Form.Control
               name="starttime"
               type="time"
               ref={register({ required: false })}
               className={errors.starttime ? "error" : ""}
-            />
+            /> */}
             {/* errors will return when field validation fails  */}
-            {errors.starttime &&
+            {/* {errors.starttime &&
               errorMessage({
                 type: errors?.starttime?.type,
               })}
-          </Form.Group>
+          </Form.Group> */}
           <Button type="submit"> Submit </Button>
         </Form>
 
