@@ -5,6 +5,7 @@ import moment from "moment";
 import Wrapper from "../components/Wrapper";
 import axios from "axios";
 import { useGlobalContext } from "../context/GlobalState";
+import swal from "sweetalert";
 
 const options = ["Home repairs", "Shopping", "Baby sitting", "Pet sitting"];
 
@@ -25,14 +26,14 @@ const PostTaskPage = () => {
       "Authorization"
     ] = `Bearer ${state.userToken}`;
   }
-  const { register, handleSubmit, watch, errors } = useForm();
+  const { register, handleSubmit, watch, errors, reset } = useForm();
 
   const [show, setShow] = useState(false);
   const target = useRef(null);
 
   const onSubmit = (data) => {
     console.log("submit data: ", data);
-    //convert date into string 
+    //convert date into string
     const startMoment = moment(
       `${data.startdate} ${data.starttime}`,
       "YYYY-MM-DD HH:mm"
@@ -45,10 +46,17 @@ const PostTaskPage = () => {
     console.log(endMoment.toISOString());
     data.email = JSON.parse(localStorage.getItem("userInfo")).email;
     //api call
-    axios.post("/api/task", data);
+    axios
+      .post("/api/task", data)
+      .then(() => {
+        reset();
+      })
+      .catch(() => {
+        swal("Oops!", "...Your task could not be added!");
+      });
   };
   //*****end date conversion*******/
-  
+
   console.log({ watch, errors });
 
   return (
@@ -189,7 +197,7 @@ const PostTaskPage = () => {
           <Overlay target={target.current} show={show} placement="right">
             {(props) => (
               <Tooltip id="overlay-example" {...props}>
-                Task Saved! 
+                Task Saved!
               </Tooltip>
             )}
           </Overlay>
