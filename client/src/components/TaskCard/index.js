@@ -1,11 +1,12 @@
 import React from "react";
 import Card from "react-bootstrap/Card";
+import AnimatedCard from "../AnimatedCard"
 import { LinkContainer } from "react-router-bootstrap";
 
 const TaskCard = ({ task, postedBy }) => {
   return (
-    <div>
-      <Card style={{ width: "18rem" }}>
+    <AnimatedCard>
+      <Card>
         <Card.Body>
           <Card.Title>{task.title}</Card.Title>
           <Card.Subtitle className="mb-2 text-muted">
@@ -22,12 +23,10 @@ const TaskCard = ({ task, postedBy }) => {
             Details
           </Card.Link>
           </LinkContainer>}
-
-
           
         </Card.Body>
       </Card>
-    </div>
+    </AnimatedCard>
   );
 };
 
