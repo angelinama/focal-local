@@ -1,3 +1,16 @@
 .nav-item{
   text-align: right;
 }
+
+.nav-link{
+  color:white !important;
+  font-weight: bolder;
+}
+
+.nav-link:hover{
+  color: #73D84F !important;
+}
+
+.active{
+  color: #73D84F !important;
+}

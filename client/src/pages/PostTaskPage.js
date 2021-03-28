@@ -1,11 +1,15 @@
 import React, { useState, useRef } from "react";
 import { Form, Button, InputGroup, Overlay, Tooltip } from "react-bootstrap";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 import { useForm } from "react-hook-form";
 import moment from "moment";
 import Wrapper from "../components/Wrapper";
 import axios from "axios";
 import { useGlobalContext } from "../context/GlobalState";
 import swal from "sweetalert";
+import "../styles/PostTask.css";
 
 const options = ["Home repairs", "Shopping", "Baby sitting", "Pet sitting"];
 
@@ -60,9 +64,11 @@ const PostTaskPage = () => {
   console.log({ watch, errors });
 
   return (
-    <>
-      <Wrapper>
-        <h1>***POST A TASK PAGE***</h1>
+    <Wrapper>
+      <Container>
+        <Row>
+          <h1 className="display-5 headline">Post a Task</h1>
+        </Row>
         {/* "handleSubmit" will validate your inputs before invoking "onSubmit" */}
         <Form onSubmit={handleSubmit(onSubmit)}>
           {/* register your input into the hook by invoking the "register" function */}
@@ -98,7 +104,11 @@ const PostTaskPage = () => {
             <Form.Label>Description</Form.Label>
             <Form.Control
               name="description"
-              ref={register({ required: true, maxLength: 250, minLength: 20 })}
+              ref={register({
+                required: true,
+                maxLength: 250,
+                minLength: 20,
+              })}
               className={errors.description ? "error" : ""}
             />
             {/* errors will return when field validation fails  */}
@@ -132,64 +142,72 @@ const PostTaskPage = () => {
                 type: errors?.payrate?.type,
               })}
           </Form.Group>
-          {/* START DATE  */}
-          <Form.Group controlId="formStartDate">
-            <Form.Label>Start Date</Form.Label>
-            <Form.Control
-              name="startdate"
-              type="date"
-              ref={register({ required: true })}
-              className={errors.startdate ? "error" : ""}
-            />
-            {/* errors will return when field validation fails  */}
-            {errors.startdate &&
-              errorMessage({
-                type: errors?.startdate?.type,
-              })}
-            {/* END DATE  */}
-            <Form.Label>End Date</Form.Label>
-            <Form.Control
-              name="enddate"
-              type="date"
-              ref={register({ required: false })}
-              className={errors.enddate ? "error" : ""}
-            />
-            {/* errors will return when field validation fails  */}
-            {errors.enddate &&
-              errorMessage({
-                type: errors?.enddate?.type,
-              })}
-          </Form.Group>
-          {/* START TIME  */}
-          <Form.Group controlId="formStartDate">
-            <Form.Label>Start Time</Form.Label>
-            <Form.Control
-              name="starttime"
-              type="time"
-              ref={register({ required: true })}
-              className={errors.starttime ? "error" : ""}
-            />
-            {/* errors will return when field validation fails  */}
-            {errors.starttime &&
-              errorMessage({
-                type: errors?.starttime?.type,
-              })}
+          <Form.Row>
+            {/* START DATE  */}
+            <Form.Group as={Col} controlId="formStartDate">
+              <Form.Label>Start Date</Form.Label>
+              <Form.Control
+                name="startdate"
+                type="date"
+                ref={register({ required: true })}
+                className={errors.startdate ? "error" : ""}
+              />
+              {/* errors will return when field validation fails  */}
+              {errors.startdate &&
+                errorMessage({
+                  type: errors?.startdate?.type,
+                })}
+            </Form.Group>
+            <Form.Group as={Col} controlId="formEndDate">
+              {/* END DATE  */}
+              <Form.Label>End Date</Form.Label>
+              <Form.Control
+                name="enddate"
+                type="date"
+                ref={register({ required: false })}
+                className={errors.enddate ? "error" : ""}
+              />
+              {/* errors will return when field validation fails  */}
+              {errors.enddate &&
+                errorMessage({
+                  type: errors?.enddate?.type,
+                })}
+            </Form.Group>
+          </Form.Row>
+          <Form.Row>
+            {/* START TIME  */}
+            <Form.Group as={Col} controlId="formStartTime">
+              <Form.Label>Start Time</Form.Label>
+              <Form.Control
+                name="starttime"
+                type="time"
+                ref={register({ required: true })}
+                className={errors.starttime ? "error" : ""}
+              />
+              {/* errors will return when field validation fails  */}
+              {errors.starttime &&
+                errorMessage({
+                  type: errors?.starttime?.type,
+                })}
+            </Form.Group>
+            <Form.Group as={Col} controlId="formEndTime">
+              {/* END TIME  */}
+              <Form.Label>End Time</Form.Label>
+              <Form.Control
+                name="endtime"
+                type="time"
+                ref={register({ required: false })}
+                className={errors.endtime ? "error" : ""}
+              />
+              {/* errors will return when field validation fails  */}
+              {errors.endtime &&
+                errorMessage({
+                  type: errors?.endtime?.type,
+                })}
+            </Form.Group>
+          </Form.Row>
 
-            {/* END TIME  */}
-            <Form.Label>End Time</Form.Label>
-            <Form.Control
-              name="endtime"
-              type="time"
-              ref={register({ required: false })}
-              className={errors.endtime ? "error" : ""}
-            />
-            {/* errors will return when field validation fails  */}
-            {errors.endtime &&
-              errorMessage({
-                type: errors?.endtime?.type,
-              })}
-          </Form.Group>
-          <Button type="submit" ref={target} onClick={() => setShow(!show)}>
+          <Button className="posttaskbtn" type="submit" ref={target} onClick={() => setShow(!show)}>
             {" "}
             Submit{" "}
           </Button>
@@ -203,8 +221,8 @@ const PostTaskPage = () => {
           </Overlay>
           {/* --- */}
         </Form>
-      </Wrapper>
-    </>
+      </Container>
+    </Wrapper>
   );
 };
 
