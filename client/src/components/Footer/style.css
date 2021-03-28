@@ -1,10 +1,8 @@
 .footer{
-  margin-top: 1rem;
+  margin-top: 80px;
   padding: 1rem;
   background-color: #143A49;
-  position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
-  z-index: 1;
 }
