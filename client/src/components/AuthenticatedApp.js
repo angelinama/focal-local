@@ -8,6 +8,7 @@ import { Button } from "react-bootstrap";
 import { useGlobalContext } from "../context/GlobalState";
 import NavTabs from "../components/NavTabs";
 import NavBar from "../components/NavBar";
+import EventCalendar from "../pages/EventCalendar";
 
 const AuthenticatedApp = () => {
   const [, dispatch] = useGlobalContext();
@@ -33,6 +34,7 @@ const AuthenticatedApp = () => {
           <Route exact path="/addtask" component={PostTaskPage} />
           <Route exact path="/details/:id" component={TaskDetailsPage} />
           <Route exact path="/myboard" component={MyBoardPage} />
+          <Route exact path="/events" component={EventCalendar} />
         </Switch>
       </Router>
       {/* TODO move this button in navbar or footer */}

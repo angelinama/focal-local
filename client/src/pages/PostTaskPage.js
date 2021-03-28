@@ -44,7 +44,7 @@ const PostTaskPage = () => {
       "YYYY-MM-DD HH:mm"
     );
     console.log(endMoment.toISOString());
-
+    //TODO get email from GlobalState since localStorage is a short-term solution for page refresh
     data.email = JSON.parse(localStorage.getItem("userInfo")).email;
 
     //api call
@@ -76,7 +76,7 @@ const PostTaskPage = () => {
             <Form.Control
               name="title"
               defaultValue=""
-              placeholder="Plant rose gargen"
+              placeholder="Plant rose garden"
               ref={register({ required: true, maxLength: 50, minLength: 8 })}
               className={errors.title ? "error" : ""}
             />
@@ -191,7 +191,7 @@ const PostTaskPage = () => {
           <Overlay target={target.current} show={show} placement="right">
             {(props) => (
               <Tooltip id="overlay-example" {...props}>
-                Task Saved! 
+                Task Saved!
               </Tooltip>
             )}
           </Overlay>

@@ -72,6 +72,16 @@ function NavTabs() {
             </Link>
           </li>
           {/* ----END MY BOARD PAGE---- */}
+          <li className="nav-item">
+            <Link
+              to="/events"
+              className={
+                location.pathname === "/events" ? "nav-link active" : "nav-link"
+              }
+            >
+              Events
+            </Link>
+          </li>
         </ul>
       </div>
     </>
