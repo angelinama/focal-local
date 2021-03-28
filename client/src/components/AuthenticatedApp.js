@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { HashRouter as Router, Route, Switch } from "react-router-dom";
 import GetTaskPage from "../pages/GetTaskPage";
 import PostTaskPage from "../pages/PostTaskPage";
 import TaskDetailsPage from "../pages/TaskDetailsPage";
@@ -11,7 +11,7 @@ import Footer from "../components/Footer";
 const AuthenticatedApp = () => {
   return (
     <>
-      <Router>
+      <Router basename="/">
         <NavBar>
           <NavTabs />
         </NavBar>
