@@ -1,5 +1,7 @@
 import React, { useRef, useState } from "react";
 import { Form, Button } from "react-bootstrap";
+import Container from "react-bootstrap/Container";
+import "../../styles/LogIn.css"
 import axios from "axios";
 import { useGlobalContext } from "../../context/GlobalState";
 
@@ -67,7 +69,7 @@ const LoginEl = () => {
   };
 
   return (
-    <>
+    <Container>
       <Form>
         <Form.Group controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
@@ -118,6 +120,7 @@ const LoginEl = () => {
         <Form.Check type="checkbox" label="Save my email" />
       </Form.Group> */}
         <Button
+          className="signbtn"
           variant="primary"
           type="submit"
           onClick={isRegister ? handleRegister : handleLogin}
@@ -131,6 +134,7 @@ const LoginEl = () => {
         <p>
           No account yet?{" "}
           <a
+            className="links"
             href="/"
             onClick={(event) => {
               event.preventDefault();
@@ -145,6 +149,7 @@ const LoginEl = () => {
         <p>
           Already signed up?{" "}
           <a
+            className="links"
             href="/"
             onClick={(event) => {
               event.preventDefault();
@@ -155,7 +160,7 @@ const LoginEl = () => {
           </a>{" "}
         </p>
       )}
-    </>
+    </Container>
   );
 };
 

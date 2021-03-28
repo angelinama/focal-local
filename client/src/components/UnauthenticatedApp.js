@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import LoginEl from "./LogIn";
 import Start from "../pages/Start";
 import NavBar from "./NavBar";
-import Wrapper from "./Wrapper";
 import Background from "../components/Background";
+import Container from "react-bootstrap/Container";
 import "../styles/UnauthenticatedApp.css";
 function UnauthenticatedApp() {
   const [isStartPage, setIsStartPage] = useState(true);
@@ -11,8 +11,8 @@ function UnauthenticatedApp() {
   return (
     <div>
       <NavBar />
-      <Background />;
-      <Wrapper>
+      <Background />
+      <Container>
         <div className="text-center">
           <img
             className="startlogo"
@@ -25,7 +25,7 @@ function UnauthenticatedApp() {
         ) : (
           <LoginEl />
         )}
-      </Wrapper>
+      </Container>
     </div>
   );
 }
