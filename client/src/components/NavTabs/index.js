@@ -11,7 +11,7 @@ function NavTabs() {
       <Link className="navbar-brand nav-text" to="/">
           <img
             src="logo400.png"
-            alt=""
+            alt="Focal Local"
             width="181"
             height="50"
             className="d-inline-block align-text-top"

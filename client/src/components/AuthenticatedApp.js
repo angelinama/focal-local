@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import GetTaskPage from "../pages/GetTaskPage";
 import PostTaskPage from "../pages/PostTaskPage";
 import TaskDetailsPage from "../pages/TaskDetailsPage";
+import MyBoardPage from "../pages/MyBoardPage";
 import { Button } from "react-bootstrap";
 import { useGlobalContext } from "../context/GlobalState";
 import NavTabs from "../components/NavTabs";
@@ -26,10 +27,12 @@ const AuthenticatedApp = () => {
           <NavTabs />
         </NavBar>
         <Switch>
+          {/* TODO change path "/" to welcome page once we build that */}
           <Route exact path="/" component={PostTaskPage} />
           <Route exact path="/gettask" component={GetTaskPage} />
           <Route exact path="/addtask" component={PostTaskPage} />
           <Route exact path="/details/:id" component={TaskDetailsPage} />
+          <Route exact path="/myboard" component={MyBoardPage} />
         </Switch>
       </Router>
       {/* TODO move this button in navbar or footer */}
