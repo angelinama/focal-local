@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
-import "../../styles/LogIn.css"
+import "../../styles/LogIn.css";
 import axios from "axios";
 import { useGlobalContext } from "../../context/GlobalState";
 
@@ -133,7 +133,7 @@ const LoginEl = () => {
       {!isRegister ? (
         <p>
           No account yet?{" "}
-          <a
+          {/* <a
             className="links"
             href="/"
             onClick={(event) => {
@@ -142,13 +142,16 @@ const LoginEl = () => {
             }}
           >
             Sign up
-          </a>{" "}
+          </a>{" "} */}
+          <Button variant="link" onClick={() => setIsRegister(true)}>
+            Sign up{" "}
+          </Button>
           instead
         </p>
       ) : (
         <p>
           Already signed up?{" "}
-          <a
+          {/* <a
             className="links"
             href="/"
             onClick={(event) => {
@@ -157,7 +160,10 @@ const LoginEl = () => {
             }}
           >
             Log in
-          </a>{" "}
+          </a>{" "} */}
+          <Button variant="link" onClick={() => setIsRegister(false)}>
+            Log in
+          </Button>
         </p>
       )}
     </Container>
