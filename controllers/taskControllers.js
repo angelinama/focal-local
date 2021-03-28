@@ -148,14 +148,13 @@ const findAllTasksAssignedToMe = async (req, res) => {
 
 const deleteTask = async (req, res) => {
   try {
-    const found = await Task.find({ getterId: req.user.id });
-    if (!found) {
+    const deleted = await Task.deleteOne({ _id: req.params.id });
+    if (deleted.deletedCount !== 1) {
       return res.status(404).json({
-        message: "No tasks found",
+        message: "No tasks deleted",
       });
     }
-    await found.delete();
-    res.send("Task Deleted")
+    return res.status(200).json({})
   } catch (error) {
     console.error(error);
     res.status(400).json({

@@ -65,11 +65,10 @@ const GetTaskPage = () => {
         let taskDate = new Date(task.startdate);
         console.log("data ", data);
         console.log("task ", task);
-        console.log("startFilterDate", startFilterDate);
+        console.log({startFilterDate});
         console.log("taskDate: ", taskDate);
         return taskDate.getTime() > startFilterDate.getTime();
       });
-
     setFilteredTasks(results);
   };
 
@@ -121,31 +120,30 @@ const GetTaskPage = () => {
                   ref={register({ required: false })}
                   className={errors.startdate ? "error" : ""}
                 />
-                {/* errors will return when field validation fails  */}
-                {errors.startdate &&
-                  errorMessage({
-                    type: errors?.startdate?.type,
-                  })}
-              </Form.Group>
+            {/* errors will return when field validation fails  */}
+            {errors.startdate &&
+              errorMessage({
+                type: errors?.startdate?.type,
+              })}
+          </Form.Group>
 
-              {/* START TIME  */}
-              {/* <Form.Group>
+          {/* START TIME  */}
+          {/* <Form.Group>
             <Form.Label>Select the time</Form.Label>
             <Form.Control
               name="starttime"
               type="time"
               ref={register({ required: false })}
-              className={errors.starttime ? "error" : ""}
-            /> */}
-              {/* errors will return when field validation fails  */}
-              {/* {errors.starttime &&
+              className={errors.starttime ? "error" : ""} */}
+            {/* /> */}
+            {/* errors will return when field validation fails  */}
+            {/* {errors.starttime &&
               errorMessage({
                 type: errors?.starttime?.type,
-              })}
-          </Form.Group> */}
+              })} */}
+          {/* </Form.Group> */}
               <Button className="gettaskbtn" type="submit">
-                {" "}
-                Submit{" "}
+                Submit
               </Button>
             </Form>
           </Col>
