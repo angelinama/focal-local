@@ -24,9 +24,8 @@ const AuthenticatedApp = () => {
           <Route exact path="/details/:id" component={TaskDetailsPage} />
           <Route exact path="/myboard" component={MyBoardPage} />
         </Switch>
+        <Footer />
       </Router>
-      
-      <Footer />
     </>
   );
 };

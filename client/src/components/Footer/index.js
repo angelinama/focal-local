@@ -1,10 +1,12 @@
 import React from "react";
 import "./style.css";
-import { Container, Row, Col, Button } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 import { useGlobalContext } from "../../context/GlobalState";
+import { Link } from "react-router-dom";
 
 
 const Footer = () => {
+
   const [, dispatch] = useGlobalContext();
 
   //handle a logout
@@ -19,14 +21,14 @@ const Footer = () => {
     <footer>
       <Container className="footer" fluid={true}>
         <Row>
-          <Col xl={6}>
-            Copyright © 2021-{new Date().getFullYear()}{" "}
-            <strong>Team ABC</strong>
-          </Col>
-          <Col xl={6}>
-            <Button variant="primary" type="submit" onClick={handleLogout}>
-              LogOut
-            </Button>
+          <Col xl={12}>
+            <ul className="navbar-nav nav-group ml-auto ">
+              <li className="nav-item">
+                <Link onClick={handleLogout} className="nav-link logout">
+                  Logout
+                </Link>
+              </li>
+            </ul>
           </Col>
         </Row>
       </Container>
