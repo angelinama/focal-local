@@ -13,16 +13,18 @@ const Events = () => {
   const SCOPES = process.env.REACT_APP_SCOPES;
 
   //TODO delete this and get data from a form
+  const endTime = new Date();
+  endTime.setHours(endTime.getHours() + 2);
   const event = {
     summary: "Focal local test event",
     location: "215 1st Ave W, Seattle, WA 98119",
     description: "Angelina's test events",
     start: {
-      dateTime: "2021-03-31T10:00:00-07:00", //ISOString using Date
+      dateTime: new Date().toISOString(), //ISOString using Date
       timeZone: "America/Los_Angeles",
     },
     end: {
-      dateTime: "2021-03-31T12:00:00-07:00",
+      dateTime: endTime,
       timeZone: "America/Los_Angeles",
     },
     // recurrence: ["RRULE:FREQ=DAILY;COUNT=2"],
