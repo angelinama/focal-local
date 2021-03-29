@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
-// import AnimatedCard from "../AnimatedCard"
 import { LinkContainer } from "react-router-bootstrap";
 import axios from "axios";
+import moment from "moment";
 
-const TaskCard = ({ task, postedBy, tasksIPosted, tasksIGot }) => {
+const TaskDetails = ({ task, postedBy, tasksIPosted }) => {
   //hook for deleted tasks
   const [hide, setHide] = useState(false);
 
@@ -19,33 +19,25 @@ const TaskCard = ({ task, postedBy, tasksIPosted, tasksIGot }) => {
       .catch((error) => console.log(error));
   };
 
-  const handleComplete = (taskID) => {
-    axios
-      .get(`/api/task/complete/${taskID}`)
-      .then((res) => {
-        setHide(true);
-        console.log(res.data);
-      })
-      .catch((error) => console.log(error));
-  }; 
+  let startdate = moment(new Date(task.startdate)).format(
+    "MMMM Do YYYY, h:mm:ss a"
+  );
 
-  let date = new Date(task.startdate);
-  date =
-    date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
+  let enddate = moment(new Date(task.enddate)).format(
+    "MMMM Do YYYY, h:mm:ss a"
+  );
 
   return (
     <>
       {hide ? null : (
-        // <AnimatedCard>
+        <>
           <Card>
+            <Card.Header>{task.category}</Card.Header>
             <Card.Body>
               <Card.Title>{task.title}</Card.Title>
-              <Card.Subtitle className="mb-2 text-muted">
-                {task.category}
-              </Card.Subtitle>
-              <Card.Text>{task.description.substr(0,35)} ...</Card.Text>
-
-              <Card.Text>{date}</Card.Text>
+              <Card.Text>{task.description}</Card.Text>
+              <Card.Text>Starting at {startdate}</Card.Text>
+              <Card.Text>Ending at {enddate}</Card.Text>
 
               {postedBy && <p>Posted by {postedBy}</p>}
 
@@ -59,17 +51,12 @@ const TaskCard = ({ task, postedBy, tasksIPosted, tasksIGot }) => {
                   DELETE TASK
                 </Button>
               )}
-              { tasksIGot && (
-                <Button onClick={() => handleComplete(task._id)}>
-                  COMPLETE
-                </Button>
-              )}
             </Card.Body>
           </Card>
-        // </AnimatedCard>
+        </>
       )}
     </>
   );
 };
 
-export default TaskCard;
+export default TaskDetails;
