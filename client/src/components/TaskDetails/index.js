@@ -19,11 +19,11 @@ const TaskDetails = ({ task, postedBy, tasksIPosted }) => {
       .catch((error) => console.log(error));
   };
 
-  let startmoment = moment(new Date(task.startdate)).format(
+  let startdate = moment(new Date(task.startdate)).format(
     "MMMM Do YYYY, h:mm:ss a"
   );
 
-  let endmoment = moment(new Date(task.startdate)).format(
+  let enddate = moment(new Date(task.startdate)).format(
     "MMMM Do YYYY, h:mm:ss a"
   );
 
@@ -39,9 +39,9 @@ const TaskDetails = ({ task, postedBy, tasksIPosted }) => {
               </Card.Subtitle>
               <Card.Text>{task.description}</Card.Text>
               <p>Start</p>
-              <Card.Text>{startmoment}</Card.Text>
+              <Card.Text>{startdate}</Card.Text>
               <p>End</p>
-              <Card.Text>{endmoment}</Card.Text>
+              <Card.Text>{enddate}</Card.Text>
 
               {postedBy && <p>Posted by {postedBy}</p>}
 
