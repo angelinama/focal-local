@@ -55,7 +55,7 @@ const TaskCard = ({ task, postedBy, tasksIPosted, tasksIGot, onComplete }) => {
                   <Card.Link>Details</Card.Link>
                 </LinkContainer>
               )}
-              {tasksIPosted && (
+              {tasksIPosted && !task.completed && (
                 <Button onClick={() => handleClick(task._id)}>
                   DELETE TASK
                 </Button>
