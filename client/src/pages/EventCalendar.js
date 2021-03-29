@@ -4,13 +4,12 @@ require("dotenv").config();
 
 const Events = () => {
   const gapi = window.gapi;
-  //TODO move client_id api_key to to Heroku?
+
   //consts need to user google calendar API
-  // const APIKey = process.env.REACT_APP_APIKey;
-  // const ClientId = process.env.REACT_APP_CLIENT_ID;
-  // const DISCOVERY = [process.env.REACT_APP_DISCOVERY_DOCS];
-  // const SCOPES = process.env.REACT_APP_SCOPES;
-  // const calendarId = process.env.REACT_APP_CALENDAR_ID;
+  const APIKey = process.env.REACT_APP_APIKey;
+  const ClientId = process.env.REACT_APP_CLIENT_ID;
+  const calendarId = process.env.REACT_APP_CALENDAR_ID;
+  const SCOPES = "https://www.googleapis.com/auth/calendar.readonly";
 
   //TODO delete this and get data from a form
   const event = {
@@ -37,28 +36,20 @@ const Events = () => {
   };
 
   // Client ID and API key from the Developer Console
-  const CLIENT_ID =
-    "969073501886-unqntplq1pkfiiuqg2aq5qotahklv5am.apps.googleusercontent.com";
-  const API_KEY = "AIzaSyCqGIxA6yPAh_hNAHr0ctoYH2ChgQVJ3ws";
+  // const CLIENT_ID ="969073501886-unqntplq1pkfiiuqg2aq5qotahklv5am.apps.googleusercontent.com";
+  // const API_KEY = "AIzaSyCqGIxA6yPAh_hNAHr0ctoYH2ChgQVJ3ws";
 
   // // Array of API discovery doc URLs for APIs used by the quickstart
   // const DISCOVERY_DOCS = [
   //   "https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest",
   // ];
 
-  // Authorization scopes required by the API; multiple scopes can be
-  // included, separated by spaces.
-  const SCOPES = "https://www.googleapis.com/auth/calendar.readonly";
-
-  /**
-   *  On load, called to load the auth2 library and API client library.
-   */
   useEffect(() => {
     function initClient() {
       gapi.client
         .init({
-          apiKey: API_KEY,
-          clientId: CLIENT_ID,
+          apiKey: APIKey,
+          clientId: ClientId,
           discoveryDocs: [
             "https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest",
           ],
@@ -91,8 +82,6 @@ const Events = () => {
    */
   function updateSigninStatus(isSignedIn) {
     if (isSignedIn) {
-      // authorizeButton.style.display = "none";
-      // signoutButton.style.display = "block";
       listUpcomingEvents();
     }
   }
@@ -110,7 +99,7 @@ const Events = () => {
   function listUpcomingEvents() {
     gapi.client.calendar.events
       .list({
-        calendarId: "j9h0hs9rah1jb53i8hrgurumr0@group.calendar.google.com",
+        calendarId: calendarId,
         timeMin: new Date().toISOString(),
         showDeleted: false,
         singleEvents: true,
@@ -138,7 +127,7 @@ const Events = () => {
 
   const postNewEvent = () => {
     const request = gapi.client.calendar.events.insert({
-      calendarId: "j9h0hs9rah1jb53i8hrgurumr0@group.calendar.google.com",
+      calendarId: calendarId,
       resource: event,
     });
 
@@ -162,7 +151,7 @@ const Events = () => {
         style={{ border: "0" }}
         width="800"
         height="600"
-        frameborder="0"
+        frameBorder="0"
         scrolling="no"
         title="eventCalendar"
       ></iframe>
