@@ -7,7 +7,7 @@ router.route("/:id").get(Task.findTask).delete(Task.deleteTask);
 
 router.route("/complete/:id").get(Task.completeTask);
 
-// router.route("/completed/").get(Task.completedCategories);
+//router.route("/completed/").get(Task.completedCategories);
 
 router.route("/assignTask/:id").post(Task.assignTask);
 
