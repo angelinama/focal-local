@@ -1,6 +1,18 @@
 .taskcard {
   box-shadow: 0px 10px 30px -5px rgba(0, 0, 0, 0.3);
   max-width: 30ch;
-  height: 30ex;
+  min-height: 30ex;
   margin: 10px;
+}
+
+.card-footer {
+  text-align: right;
+}
+
+.card-link {
+  color: #0F8D35
+}
+
+.card-link:hover {
+  color: #73D84F
 }

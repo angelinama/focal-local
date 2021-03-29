@@ -5,6 +5,9 @@ import AnimatedCard from "../AnimatedCard"
 import { LinkContainer } from "react-router-bootstrap";
 import axios from "axios";
 import "./style.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faForward } from "@fortawesome/free-solid-svg-icons";
+
 
 
 const TaskCard = ({ task, postedBy, tasksIPosted, tasksIGot, onComplete }) => {
@@ -47,7 +50,7 @@ const TaskCard = ({ task, postedBy, tasksIPosted, tasksIGot, onComplete }) => {
             </Card.Header>
             <Card.Body>
               <Card.Title>{task.title}</Card.Title>
-              <Card.Text>{task.description.substr(0, 35)} ...</Card.Text>
+              <Card.Text>{task.description.substr(0, 20)} ...</Card.Text>
 
               <Card.Text>{date}</Card.Text>
 
@@ -56,7 +59,9 @@ const TaskCard = ({ task, postedBy, tasksIPosted, tasksIGot, onComplete }) => {
             <Card.Footer>
               {!postedBy && (
                 <LinkContainer to={`/details/${task._id}`}>
-                  <Card.Link>Details</Card.Link>
+                  <Card.Link>
+                    Details <FontAwesomeIcon icon={faForward} />
+                  </Card.Link>
                 </LinkContainer>
               )}
               {tasksIPosted && !task.completed && (
