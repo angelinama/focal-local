@@ -126,12 +126,12 @@ const GetTaskPage = () => {
                   ref={register({ required: false })}
                   className={errors.startdate ? "error" : ""}
                 />
-            {/* errors will return when field validation fails  */}
-            {errors.startdate &&
-              errorMessage({
-                type: errors?.startdate?.type,
-              })}
-          </Form.Group>
+                {/* errors will return when field validation fails  */}
+                {errors.startdate &&
+                  errorMessage({
+                    type: errors?.startdate?.type,
+                  })}
+              </Form.Group>
               <Button className="gettaskbtn" type="submit">
                 Submit
               </Button>
@@ -139,13 +139,13 @@ const GetTaskPage = () => {
           </Col>
         </Row>
         <Row>
-          <Col className="alltaskcol">
+          {/* <Col className="alltaskcol"> */}
             <AllTasks
               taskList={taskList}
               filteredTasks={filteredTasks}
               setFilteredTasks={setFilteredTasks}
             />
-          </Col>
+          {/* </Col> */}
         </Row>
       </Container>
     </Wrapper>
