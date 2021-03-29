@@ -19,7 +19,7 @@ const errorMessage = ({ type, minLength = 0, maxLength = 0 }) => {
 };
 
 const GetTaskPage = () => {
-  const { register, handleSubmit, watch, errors } = useForm();
+  const { register, handleSubmit, watch, errors, reset} = useForm();
   // Tasks state
   const [taskList, setTaskList] = useState([]);
   const [filteredTasks, setFilteredTasks] = useState([]);
@@ -51,6 +51,7 @@ const GetTaskPage = () => {
     console.log("logging data ", data);
     let results = taskList
       .filter((task) => {
+
         console.log({ task: task.category, data: data.category });
         if (!data.category.length) return true;
         return data.category.includes(task.category);
@@ -59,15 +60,18 @@ const GetTaskPage = () => {
         return data.volunteer ? task.payrate === 0 : true;
       })
       .filter((task) => {
+   
+        
+        if(!data.startdate) return true;
         let startFilterDate = new Date(data.startdate);
+        
         let taskDate = new Date(task.startdate);
-        console.log("data ", data);
-        console.log("task ", task);
-        console.log({startFilterDate});
-        console.log("taskDate: ", taskDate);
+      
         return taskDate.getTime() > startFilterDate.getTime();
       });
+      
     setFilteredTasks(results);
+    reset();
   };
 
   console.log({ watch, errors });
