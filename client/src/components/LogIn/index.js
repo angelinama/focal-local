@@ -52,13 +52,14 @@ const LoginEl = () => {
     //send axios request to /auth/login
     //TODO handle error during login
     const {
-      data: { email, token },
+      data: { email, token, id },
     } = await axios.post("/auth/login", inputs);
     localStorage.setItem(
       "userInfo",
       JSON.stringify({
         email,
         token,
+        id,
       })
     );
     dispatch({

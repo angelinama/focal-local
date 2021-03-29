@@ -42,6 +42,10 @@ const TaskSchema = mongoose.Schema({
   enddate: {
     type: Date,
   },
+  completed: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const Task = mongoose.model("Task", TaskSchema);

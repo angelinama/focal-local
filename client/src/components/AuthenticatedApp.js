@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { HashRouter as Router, Route, Switch } from "react-router-dom";
 import GetTaskPage from "../pages/GetTaskPage";
 import PostTaskPage from "../pages/PostTaskPage";
 import TaskDetailsPage from "../pages/TaskDetailsPage";
@@ -12,19 +12,19 @@ import EventCalendar from "../pages/EventCalendar";
 const AuthenticatedApp = () => {
   return (
     <>
-      <Router>
+      <Router basename="/">
         <NavBar>
           <NavTabs />
         </NavBar>
-        <Switch>
-          {/* TODO change path "/" to welcome page once we build that */}
-          <Route exact path="/" component={PostTaskPage} />
-          <Route exact path="/gettask" component={GetTaskPage} />
-          <Route exact path="/addtask" component={PostTaskPage} />
-          <Route exact path="/details/:id" component={TaskDetailsPage} />
-          <Route exact path="/myboard" component={MyBoardPage} />
-          <Route exact path="/events" component={EventCalendar} />
-        </Switch>
+
+        {/* TODO change path "/" to welcome page once we build that */}
+        <Route exact path="/" component={PostTaskPage} />
+        <Route exact path="/gettask" component={GetTaskPage} />
+        <Route exact path="/addtask" component={PostTaskPage} />
+        <Route exact path="/details/:id" component={TaskDetailsPage} />
+        <Route exact path="/myboard" component={MyBoardPage} />
+        <Route exact path="/events" component={EventCalendar} />
+
         <Footer />
       </Router>
     </>
