@@ -64,7 +64,6 @@ const GetTaskPage = () => {
         return data.volunteer ? task.payrate === 0 : true;
       })
       .filter((task) => {
-   
         
         if(!data.startdate) return true;
         let startFilterDate = new Date(data.startdate);

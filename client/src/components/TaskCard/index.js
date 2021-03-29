@@ -5,7 +5,7 @@ import Button from "react-bootstrap/Button";
 import { LinkContainer } from "react-router-bootstrap";
 import axios from "axios";
 
-const TaskCard = ({ task, postedBy, tasksIPosted, tasksIGot }) => {
+const TaskCard = ({ task, postedBy, tasksIPosted, tasksIGot, onComplete }) => {
   //hook for deleted tasks
   const [hide, setHide] = useState(false);
 
@@ -25,6 +25,7 @@ const TaskCard = ({ task, postedBy, tasksIPosted, tasksIGot }) => {
       .then((res) => {
         setHide(true);
         console.log(res.data);
+        onComplete();
       })
       .catch((error) => console.log(error));
   }; 
@@ -54,7 +55,7 @@ const TaskCard = ({ task, postedBy, tasksIPosted, tasksIGot }) => {
                   <Card.Link>Details</Card.Link>
                 </LinkContainer>
               )}
-              {tasksIPosted && (
+              {tasksIPosted && !task.completed && (
                 <Button onClick={() => handleClick(task._id)}>
                   DELETE TASK
                 </Button>
