@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useGlobalContext } from "../context/GlobalState";
-import TaskCard from "../components/TaskCard";
+import TaskDetails from "../components/TaskDetails";
 import Wrapper from "../components/Wrapper";
 import Button from "react-bootstrap/Button";
 
@@ -57,7 +57,7 @@ const TaskDetailsPage = () => {
     <>
       <Wrapper>
         <h1>*** Task Details Page ***</h1>
-        <TaskCard task={task} postedBy={user?.userName}/>
+        <TaskDetails task={task} postedBy={user?.userName} />
 
         <Button onClick={handleClick}>GET THE TASK</Button>
         <Button href={`mailto: ${user?.email}`}>ASK A QUESTION</Button>
