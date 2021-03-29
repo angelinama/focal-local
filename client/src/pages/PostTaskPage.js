@@ -224,7 +224,6 @@ const PostTaskPage = () => {
             Submit{" "}
           </Button>
           {/* --- */}
-<<<<<<< HEAD
           {show && (
             <Overlay target={target.current} show={show} placement="right">
               {(props) => (
@@ -234,15 +233,6 @@ const PostTaskPage = () => {
               )}
             </Overlay>
           )}
-=======
-          <Overlay target={target.current} show={show} placement="right">
-            {(props) => (
-              <Tooltip id="overlay-example" {...props}>
-                Task Saved!
-              </Tooltip>
-            )}
-          </Overlay>
->>>>>>> 68973db5 (get start on Google Calendar)
           {/* --- */}
         </Form>
       </Container>
