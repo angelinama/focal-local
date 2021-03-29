@@ -43,11 +43,15 @@ const PostTaskPage = () => {
       "YYYY-MM-DD HH:mm"
     );
     console.log(startMoment.toISOString());
+    data.startdate = startMoment
+
     const endMoment = moment(
       `${data.enddate} ${data.endtime}`,
       "YYYY-MM-DD HH:mm"
     );
     console.log(endMoment.toISOString());
+    data.enddate = endMoment
+
     data.email = JSON.parse(localStorage.getItem("userInfo")).email;
     //api call
     axios
