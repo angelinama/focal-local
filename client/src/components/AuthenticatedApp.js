@@ -1,5 +1,5 @@
 import React from "react";
-import { HashRouter as Router, Route, Switch } from "react-router-dom";
+import { HashRouter as Router, Route } from "react-router-dom";
 import GetTaskPage from "../pages/GetTaskPage";
 import PostTaskPage from "../pages/PostTaskPage";
 import TaskDetailsPage from "../pages/TaskDetailsPage";
