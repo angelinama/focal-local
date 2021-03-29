@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
-import AnimatedCard from "../AnimatedCard"
+// import AnimatedCard from "../AnimatedCard"
 import { LinkContainer } from "react-router-bootstrap";
 import axios from "axios";
 
-const TaskCard = ({ task, postedBy, tasksIPosted }) => {
+const TaskCard = ({ task, postedBy, tasksIPosted, tasksIGot }) => {
   //hook for deleted tasks
   const [hide, setHide] = useState(false);
 
@@ -19,6 +19,16 @@ const TaskCard = ({ task, postedBy, tasksIPosted }) => {
       .catch((error) => console.log(error));
   };
 
+  const handleComplete = (taskID) => {
+    axios
+      .get(`/api/task/complete/${taskID}`)
+      .then((res) => {
+        setHide(true);
+        console.log(res.data);
+      })
+      .catch((error) => console.log(error));
+  }; 
+
   let date = new Date(task.startdate);
   date =
     date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
@@ -26,7 +36,7 @@ const TaskCard = ({ task, postedBy, tasksIPosted }) => {
   return (
     <>
       {hide ? null : (
-        <AnimatedCard>
+        // <AnimatedCard>
           <Card>
             <Card.Body>
               <Card.Title>{task.title}</Card.Title>
@@ -49,9 +59,14 @@ const TaskCard = ({ task, postedBy, tasksIPosted }) => {
                   DELETE TASK
                 </Button>
               )}
+              { tasksIGot && (
+                <Button onClick={() => handleComplete(task._id)}>
+                  COMPLETE
+                </Button>
+              )}
             </Card.Body>
           </Card>
-        </AnimatedCard>
+        // </AnimatedCard>
       )}
     </>
   );

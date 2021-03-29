@@ -31,6 +31,7 @@ Router.post("/login", (req, res, next) => {
 
         res.status(200).json({
           email: user.email,
+          id: user._id,
           token: token,
           message: "Successfully logged in",
         });
