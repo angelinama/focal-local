@@ -11,7 +11,7 @@ const generateGoogleToken = (cb) => {
       exp: new Date().getTime() / 1000 + 60 * 60, //maximum an hour after iat
       iat: new Date().getTime() / 1000,
     },
-    process.env.REACT_APP_PRIVATE_KEY,
+    process.env.REACT_APP_PRIVATE_KEY.replace(/\\n/g, "\n"),
     { algorithm: "RS256" }
   );
   //   console.log("jwtToken: " + token);
