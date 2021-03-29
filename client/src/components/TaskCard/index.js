@@ -43,7 +43,7 @@ const TaskCard = ({ task, postedBy, tasksIPosted, tasksIGot }) => {
               <Card.Subtitle className="mb-2 text-muted">
                 {task.category}
               </Card.Subtitle>
-              <Card.Text>{task.description}</Card.Text>
+              <Card.Text>{task.description.substr(0,35)} ...</Card.Text>
 
               <Card.Text>{date}</Card.Text>
 
