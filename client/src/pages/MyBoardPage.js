@@ -7,6 +7,7 @@ import { useGlobalContext } from "../context/GlobalState";
 const MyBoardPage = () => {
   const [myTasks, setMyTasks] = useState([]);
   const [myAssignments, setMyAssignments] = useState([]);
+  const [tasksIGotHelpWith, setTasksIGotHelpWith] = useState([]);
   const [myCompletedTasks, setmyCompletedTasks] = useState([]);
   const [state] = useGlobalContext();
 
@@ -20,7 +21,8 @@ const MyBoardPage = () => {
       .get("/api/task/myboard/postedbyme")
       .then((response) => {
         console.log(response.data);
-        setMyTasks(response.data);
+        setMyTasks(response.data.filter((task) => !task.completed));
+        setTasksIGotHelpWith(response.data.filter((task) => task.completed));
       })
       .catch((error) => {
         // handle error
@@ -65,10 +67,12 @@ const MyBoardPage = () => {
     <div>
       <h1>*** My Board Page ***</h1>
       <MyPieChart data={myCompletedTasks} />
-      <h2>Task I Got</h2>
+      <h2>Task I Am Working On</h2>
       <AllTasks onComplete={updateMyBoardPage} filteredTasks={myAssignments} tasksIGot />
-      <h2>Tasks I Posted</h2>
+      <h2>Tasks I Need Help With</h2>
       <AllTasks filteredTasks={myTasks} tasksIPosted />
+      <h2>Tasks I Got Help With</h2>
+      <AllTasks filteredTasks={tasksIGotHelpWith}/>
     </div>
   );
 };
