@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
-import { LinkContainer } from "react-router-bootstrap";
 import axios from "axios";
 import moment from "moment";
 
@@ -37,15 +36,12 @@ const TaskDetails = ({ task, postedBy, tasksIPosted }) => {
               <Card.Text>{task.description}</Card.Text>
               <Card.Text>${task.payrate}</Card.Text>
               <Card.Text>Starting: {startdate}</Card.Text>
+              {enddate &&
               <Card.Text>Ending: {enddate}</Card.Text>
+              }
 
               {postedBy && <p>Posted by {postedBy}</p>}
 
-              {!postedBy && (
-                <LinkContainer to={`/details/${task._id}`}>
-                  <Card.Link>Details</Card.Link>
-                </LinkContainer>
-              )}
               {tasksIPosted && (
                 <Button onClick={() => handleClick(task._id)}>
                   DELETE TASK
