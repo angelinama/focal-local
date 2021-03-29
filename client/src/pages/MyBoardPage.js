@@ -15,8 +15,7 @@ const MyBoardPage = () => {
       "Authorization"
     ] = `Bearer ${state.userToken}`;
   }
-
-  useEffect(() => {
+  const updateMyBoardPage = () => {
     axios
       .get("/api/task/myboard/postedbyme")
       .then((response) => {
@@ -50,7 +49,7 @@ const MyBoardPage = () => {
           const keyStr = key.replace("_", " ");
           pieChartData.push([keyStr, NumOfOccurrences[key]]);
         });
-        console.log({pieChartData});
+        console.log({ pieChartData });
         setMyAssignments(assignedToMe);
         setmyCompletedTasks(pieChartData);
       })
@@ -58,16 +57,16 @@ const MyBoardPage = () => {
         // handle error
         console.log(error);
       });
-  }, []);
+  };
+
+  useEffect(updateMyBoardPage, []);
 
   return (
     <div>
       <h1>*** My Board Page ***</h1>
-      <MyPieChart
-        data={myCompletedTasks}
-      />
+      <MyPieChart data={myCompletedTasks} />
       <h2>Task I Got</h2>
-      <AllTasks filteredTasks={myAssignments} tasksIGot />
+      <AllTasks onComplete={updateMyBoardPage} filteredTasks={myAssignments} tasksIGot />
       <h2>Tasks I Posted</h2>
       <AllTasks filteredTasks={myTasks} tasksIPosted />
     </div>
