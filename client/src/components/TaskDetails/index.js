@@ -23,8 +23,6 @@ const TaskDetails = ({ task, postedBy, tasksIPosted }) => {
     "MMMM Do YYYY, h:mm a"
   );
 
-  // let someVar = condition ? returned if true : returned if false
-
   let enddate = task.enddate ? moment(new Date(task.enddate))
     .format("MMMM Do YYYY, h:mm a") : null;
 
@@ -37,6 +35,7 @@ const TaskDetails = ({ task, postedBy, tasksIPosted }) => {
             <Card.Body>
               <Card.Title>{task.title}</Card.Title>
               <Card.Text>{task.description}</Card.Text>
+              <Card.Text>${task.payrate}</Card.Text>
               <Card.Text>Starting: {startdate}</Card.Text>
               <Card.Text>Ending: {enddate}</Card.Text>
 
