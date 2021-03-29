@@ -38,37 +38,35 @@ const TaskCard = ({ task, postedBy, tasksIPosted, tasksIGot, onComplete }) => {
     <>
       {hide ? null : (
         <div>
-          <AnimatedCard>
-            {/* <Card> */}
-              <Card.Body>
-                <Card.Title>{task.title}</Card.Title>
-                <Card.Subtitle className="mb-2 text-muted">
-                  {task.category}
-                </Card.Subtitle>
-                <Card.Text>{task.description.substr(0, 35)} ...</Card.Text>
+          {/* <AnimatedCard> */}
+            <Card>
+            <Card.Body>
+              <Card.Subtitle className="mb-2 text-muted">{task.category}</Card.Subtitle>
+              <Card.Title>{task.title}</Card.Title>
+              <Card.Text>{task.description.substr(0, 35)} ...</Card.Text>
 
-                <Card.Text>{date}</Card.Text>
+              <Card.Text>{date}</Card.Text>
 
-                {postedBy && <p>Posted by {postedBy}</p>}
+              {postedBy && <p>Posted by {postedBy}</p>}
 
-                {!postedBy && (
-                  <LinkContainer to={`/details/${task._id}`}>
-                    <Card.Link>Details</Card.Link>
-                  </LinkContainer>
-                )}
-                {tasksIPosted && !task.completed && (
-                  <Button onClick={() => handleClick(task._id)}>
-                    DELETE TASK
-                  </Button>
-                )}
-                {tasksIGot && (
-                  <Button onClick={() => handleComplete(task._id)}>
-                    COMPLETE
-                  </Button>
-                )}
-              </Card.Body>
-            {/* </Card> */}
-          </AnimatedCard>
+              {!postedBy && (
+                <LinkContainer to={`/details/${task._id}`}>
+                  <Card.Link>Details</Card.Link>
+                </LinkContainer>
+              )}
+              {tasksIPosted && !task.completed && (
+                <Button onClick={() => handleClick(task._id)}>
+                  DELETE TASK
+                </Button>
+              )}
+              {tasksIGot && (
+                <Button onClick={() => handleComplete(task._id)}>
+                  COMPLETE
+                </Button>
+              )}
+            </Card.Body>
+            </Card>
+          {/* </AnimatedCard> */}
         </div>
       )}
     </>
