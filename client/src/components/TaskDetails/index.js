@@ -23,7 +23,7 @@ const TaskDetails = ({ task, postedBy, tasksIPosted }) => {
     "MMMM Do YYYY, h:mm:ss a"
   );
 
-  let enddate = moment(new Date(task.startdate)).format(
+  let enddate = moment(new Date(task.enddate)).format(
     "MMMM Do YYYY, h:mm:ss a"
   );
 
@@ -32,16 +32,12 @@ const TaskDetails = ({ task, postedBy, tasksIPosted }) => {
       {hide ? null : (
         <>
           <Card>
+            <Card.Header>{task.category}</Card.Header>
             <Card.Body>
               <Card.Title>{task.title}</Card.Title>
-              <Card.Subtitle className="mb-2 text-muted">
-                {task.category}
-              </Card.Subtitle>
               <Card.Text>{task.description}</Card.Text>
-              <p>Start</p>
-              <Card.Text>{startdate}</Card.Text>
-              <p>End</p>
-              <Card.Text>{enddate}</Card.Text>
+              <Card.Text>Starting at {startdate}</Card.Text>
+              <Card.Text>Ending at {enddate}</Card.Text>
 
               {postedBy && <p>Posted by {postedBy}</p>}
 

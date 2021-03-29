@@ -30,7 +30,7 @@ const PostTaskPage = () => {
       "Authorization"
     ] = `Bearer ${state.userToken}`;
   }
-  const { register, handleSubmit, watch, errors, reset } = useForm();
+  const { register, handleSubmit, errors, reset } = useForm();
 
   const [show, setShow] = useState(false);
   const target = useRef(null);
