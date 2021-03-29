@@ -138,13 +138,11 @@ const GetTaskPage = () => {
           </Col>
         </Row>
         <Row>
-          {/* <Col className="alltaskcol"> */}
             <AllTasks
               taskList={taskList}
               filteredTasks={filteredTasks}
               setFilteredTasks={setFilteredTasks}
             />
-          {/* </Col> */}
         </Row>
       </Container>
     </Wrapper>

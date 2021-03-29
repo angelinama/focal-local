@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
-// import AnimatedCard from "../AnimatedCard"
+import AnimatedCard from "../AnimatedCard"
 import { LinkContainer } from "react-router-bootstrap";
 import axios from "axios";
 
@@ -37,37 +37,39 @@ const TaskCard = ({ task, postedBy, tasksIPosted, tasksIGot, onComplete }) => {
   return (
     <>
       {hide ? null : (
-        // <AnimatedCard>
-          <Card>
-            <Card.Body>
-              <Card.Title>{task.title}</Card.Title>
-              <Card.Subtitle className="mb-2 text-muted">
-                {task.category}
-              </Card.Subtitle>
-              <Card.Text>{task.description.substr(0,35)} ...</Card.Text>
+        <div>
+          <AnimatedCard>
+            {/* <Card> */}
+              <Card.Body>
+                <Card.Title>{task.title}</Card.Title>
+                <Card.Subtitle className="mb-2 text-muted">
+                  {task.category}
+                </Card.Subtitle>
+                <Card.Text>{task.description.substr(0, 35)} ...</Card.Text>
 
-              <Card.Text>{date}</Card.Text>
+                <Card.Text>{date}</Card.Text>
 
-              {postedBy && <p>Posted by {postedBy}</p>}
+                {postedBy && <p>Posted by {postedBy}</p>}
 
-              {!postedBy && (
-                <LinkContainer to={`/details/${task._id}`}>
-                  <Card.Link>Details</Card.Link>
-                </LinkContainer>
-              )}
-              {tasksIPosted && !task.completed && (
-                <Button onClick={() => handleClick(task._id)}>
-                  DELETE TASK
-                </Button>
-              )}
-              { tasksIGot && (
-                <Button onClick={() => handleComplete(task._id)}>
-                  COMPLETE
-                </Button>
-              )}
-            </Card.Body>
-          </Card>
-        // </AnimatedCard>
+                {!postedBy && (
+                  <LinkContainer to={`/details/${task._id}`}>
+                    <Card.Link>Details</Card.Link>
+                  </LinkContainer>
+                )}
+                {tasksIPosted && !task.completed && (
+                  <Button onClick={() => handleClick(task._id)}>
+                    DELETE TASK
+                  </Button>
+                )}
+                {tasksIGot && (
+                  <Button onClick={() => handleComplete(task._id)}>
+                    COMPLETE
+                  </Button>
+                )}
+              </Card.Body>
+            {/* </Card> */}
+          </AnimatedCard>
+        </div>
       )}
     </>
   );
