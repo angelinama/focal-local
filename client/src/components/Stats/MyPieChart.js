@@ -13,8 +13,7 @@ const MyPieChart = ({ data }) => {
         loader={<div>Loading Chart</div>}
         data={data}
         options={{
-          title: "My Daily Activities",
-          // Just add this option
+          title: "My Performed Tasks",
           is3D: true,
         }}
         rootProps={{ "data-testid": "2" }}
