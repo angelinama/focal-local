@@ -4,6 +4,8 @@ import Button from "react-bootstrap/Button";
 import AnimatedCard from "../AnimatedCard"
 import { LinkContainer } from "react-router-bootstrap";
 import axios from "axios";
+import "./style.css";
+
 
 const TaskCard = ({ task, postedBy, tasksIPosted, tasksIGot, onComplete }) => {
   //hook for deleted tasks
@@ -39,16 +41,19 @@ const TaskCard = ({ task, postedBy, tasksIPosted, tasksIGot, onComplete }) => {
       {hide ? null : (
         <div>
           {/* <AnimatedCard> */}
-            <Card>
+          <Card className="taskcard">
+            <Card.Header className="mb-2 text-muted">
+              {task.category}
+            </Card.Header>
             <Card.Body>
-              <Card.Subtitle className="mb-2 text-muted">{task.category}</Card.Subtitle>
               <Card.Title>{task.title}</Card.Title>
               <Card.Text>{task.description.substr(0, 35)} ...</Card.Text>
 
               <Card.Text>{date}</Card.Text>
 
               {postedBy && <p>Posted by {postedBy}</p>}
-
+            </Card.Body>
+            <Card.Footer>
               {!postedBy && (
                 <LinkContainer to={`/details/${task._id}`}>
                   <Card.Link>Details</Card.Link>
@@ -64,8 +69,8 @@ const TaskCard = ({ task, postedBy, tasksIPosted, tasksIGot, onComplete }) => {
                   COMPLETE
                 </Button>
               )}
-            </Card.Body>
-            </Card>
+            </Card.Footer>
+          </Card>
           {/* </AnimatedCard> */}
         </div>
       )}
