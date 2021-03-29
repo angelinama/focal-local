@@ -9,6 +9,7 @@ import axios from "axios";
 import AllTasks from "../components/AllTasks";
 import { useGlobalContext } from "../context/GlobalState";
 import "../styles/GetTask.css";
+import { isMyTask } from "../utils";
 
 const options = ["Home repairs", "Shopping", "Baby sitting", "Pet sitting"];
 
@@ -39,9 +40,10 @@ const GetTaskPage = () => {
     axios
       .get("/api/task")
       .then((response) => {
+        const othersTasks = response.data.filter((task)=>!isMyTask(task))
         // handle success
-        setTaskList(response.data);
-        setFilteredTasks(response.data);
+        setTaskList(othersTasks);
+        setFilteredTasks(othersTasks);
       })
       .catch((error) => {
         // handle error
@@ -126,22 +128,6 @@ const GetTaskPage = () => {
                 type: errors?.startdate?.type,
               })}
           </Form.Group>
-
-          {/* START TIME  */}
-          {/* <Form.Group>
-            <Form.Label>Select the time</Form.Label>
-            <Form.Control
-              name="starttime"
-              type="time"
-              ref={register({ required: false })}
-              className={errors.starttime ? "error" : ""} */}
-            {/* /> */}
-            {/* errors will return when field validation fails  */}
-            {/* {errors.starttime &&
-              errorMessage({
-                type: errors?.starttime?.type,
-              })} */}
-          {/* </Form.Group> */}
               <Button className="gettaskbtn" type="submit">
                 Submit
               </Button>
