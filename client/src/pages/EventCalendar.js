@@ -156,6 +156,16 @@ const Events = () => {
       <Button onClick={handleSignoutClick}>Sign Out Google account</Button>
       <h1>***** Where the event lists goes later</h1>
       <pre id="content" style={{ whiteSpace: "pre-wrap" }}></pre>
+      {/* TODO best practice to add iframe */}
+      <iframe
+        src="https://calendar.google.com/calendar/embed?src=j9h0hs9rah1jb53i8hrgurumr0%40group.calendar.google.com&ctz=America%2FLos_Angeles"
+        style={{ border: "0" }}
+        width="800"
+        height="600"
+        frameborder="0"
+        scrolling="no"
+        title="eventCalendar"
+      ></iframe>
     </div>
   );
 };
