@@ -13,7 +13,7 @@ router.use("/api", passport.authenticate("jwt", { session: false }), apiRoutes);
 // Send every other request to the React app
 router.get("*", (req, res) => {
   //this route shoule not be authenticated otherwise it will protect the whole react pages including login and signup
-  //TODO why the routes is wrong?
+  //TODO take a note
   res.sendFile(path.join(__dirname, "../client/build/index.html"));
 });
 

@@ -1,5 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
+import generateGoogleToken from "../utils/googleToken";
 require("dotenv").config();
 
 const Events = () => {
@@ -9,42 +10,40 @@ const Events = () => {
   const APIKey = process.env.REACT_APP_APIKey;
   const ClientId = process.env.REACT_APP_CLIENT_ID;
   const calendarId = process.env.REACT_APP_CALENDAR_ID;
-  const SCOPES = "https://www.googleapis.com/auth/calendar.readonly";
+  const SCOPES = process.env.REACT_APP_SCOPES;
 
   //TODO delete this and get data from a form
   const event = {
     summary: "Focal local test event",
-    location: "800 Howard St., San Francisco, CA 94103",
-    description: "A chance to hear more about Google's developer products.",
+    location: "215 1st Ave W, Seattle, WA 98119",
+    description: "Angelina's test events",
     start: {
-      dateTime: "2021-03-30T09:00:00-07:00", //ISOString using Date
+      dateTime: "2021-03-31T10:00:00-07:00", //ISOString using Date
       timeZone: "America/Los_Angeles",
     },
     end: {
-      dateTime: "2021-03-30T17:00:00-07:00",
+      dateTime: "2021-03-31T12:00:00-07:00",
       timeZone: "America/Los_Angeles",
     },
-    recurrence: ["RRULE:FREQ=DAILY;COUNT=2"],
-    attendees: [],
-    reminders: {
-      useDefault: false,
-      overrides: [
-        { method: "email", minutes: 24 * 60 },
-        { method: "popup", minutes: 10 },
-      ],
-    },
+    // recurrence: ["RRULE:FREQ=DAILY;COUNT=2"],
+    // attendees: [],
+    // reminders: {
+    //   useDefault: false,
+    //   overrides: [
+    //     { method: "email", minutes: 24 * 60 },
+    //     { method: "popup", minutes: 10 },
+    //   ],
+    // },
   };
 
-  // Client ID and API key from the Developer Console
-  // const CLIENT_ID ="969073501886-unqntplq1pkfiiuqg2aq5qotahklv5am.apps.googleusercontent.com";
-  // const API_KEY = "AIzaSyCqGIxA6yPAh_hNAHr0ctoYH2ChgQVJ3ws";
-
-  // // Array of API discovery doc URLs for APIs used by the quickstart
-  // const DISCOVERY_DOCS = [
-  //   "https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest",
-  // ];
+  const [accessToken, setAccessToken] = useState("");
 
   useEffect(() => {
+    //TODO instead of run everytime, check the expiration time
+    generateGoogleToken(setAccessToken);
+
+    // gapi.client.setToken({ access_token: accessToken });
+
     function initClient() {
       gapi.client
         .init({
@@ -83,6 +82,8 @@ const Events = () => {
   function updateSigninStatus(isSignedIn) {
     if (isSignedIn) {
       listUpcomingEvents();
+    } else {
+      gapi.client.setToken({ access_token: accessToken });
     }
   }
 
