@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Redirect, useParams } from "react-router-dom";
 import axios from "axios";
 import { useGlobalContext } from "../context/GlobalState";
 import TaskDetails from "../components/TaskDetails";
@@ -19,6 +19,7 @@ const TaskDetailsPage = () => {
   console.log(id);
   const [task, setTask] = useState(null);
   const [user, setUser] = useState(null);
+  const [goToMyBoard, setGoToMyBoard] = useState(false);
 
   useEffect(() => {
     axios
@@ -43,15 +44,16 @@ const TaskDetailsPage = () => {
   }
   console.log(user);
 
-  const handleClick = ()=>{
+  const handleClick = () => {
     console.log("handleClick", id);
     axios
       .post(`/api/task/assignTask/${id}`)
       .then((res) => {
         console.log(res.data);
+        setGoToMyBoard(true);
       })
       .catch((error) => console.log(error));
-  }
+  };
 
   return (
     <>
@@ -61,6 +63,9 @@ const TaskDetailsPage = () => {
 
         <Button onClick={handleClick}>GET THE TASK</Button>
         <Button href={`mailto: ${user?.email}`}>ASK A QUESTION</Button>
+        {goToMyBoard &&
+          <Redirect to="/myboard"/>
+        }
       </Wrapper>
     </>
   );
