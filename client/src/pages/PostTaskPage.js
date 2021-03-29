@@ -54,10 +54,13 @@ const PostTaskPage = () => {
 
     data.email = JSON.parse(localStorage.getItem("userInfo")).email;
     //api call
+    setShow(false);
     axios
       .post("/api/task", data)
       .then(() => {
+        console.log("axios called");
         reset();
+        setShow(true);
       })
       .catch(() => {
         swal("Oops!", "...Your task could not be added!");
@@ -65,7 +68,7 @@ const PostTaskPage = () => {
   };
   //*****end date conversion*******/
 
-  console.log({ watch, errors });
+  // console.log('Errors watch', {errors, watch} );
 
   return (
     <Wrapper>
@@ -211,18 +214,20 @@ const PostTaskPage = () => {
             </Form.Group>
           </Form.Row>
 
-          <Button className="posttaskbtn" type="submit" ref={target} onClick={() => setShow(!show)}>
+          <Button className="posttaskbtn" type="submit" ref={target}>
             {" "}
             Submit{" "}
           </Button>
           {/* --- */}
-          <Overlay target={target.current} show={show} placement="right">
-            {(props) => (
-              <Tooltip id="overlay-example" {...props}>
-                Task Saved!
-              </Tooltip>
-            )}
-          </Overlay>
+          {show && (
+            <Overlay target={target.current} show={show} placement="right">
+              {(props) => (
+                <Tooltip id="overlay-example" {...props}>
+                  Task Saved!
+                </Tooltip>
+              )}
+            </Overlay>
+          )}
           {/* --- */}
         </Form>
       </Container>
