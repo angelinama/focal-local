@@ -10,7 +10,6 @@ import AllTasks from "../components/AllTasks";
 import { useGlobalContext } from "../context/GlobalState";
 import "../styles/GetTask.css";
 import { isMyTask } from "../utils";
-import Background from "../components/Background"
 
 const options = ["Home repairs", "Shopping", "Baby sitting", "Pet sitting"];
 

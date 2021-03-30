@@ -3,6 +3,11 @@ import AllTasks from "../components/AllTasks";
 import MyPieChart from "../components/Stats/MyPieChart";
 import axios from "axios";
 import { useGlobalContext } from "../context/GlobalState";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Wrapper from "../components/Wrapper";
+import "../styles/MyBoard.css";
 
 const MyBoardPage = () => {
   const [myTasks, setMyTasks] = useState([]);
@@ -64,16 +69,44 @@ const MyBoardPage = () => {
   useEffect(updateMyBoardPage, []);
 
   return (
-    <div>
-      <h1>*** My Board Page ***</h1>
-      <MyPieChart data={myCompletedTasks} />
-      <h2>Task I Am Working On</h2>
-      <AllTasks onComplete={updateMyBoardPage} filteredTasks={myAssignments} tasksIGot />
-      <h2>Tasks I Need Help With</h2>
-      <AllTasks filteredTasks={myTasks} tasksIPosted />
-      <h2>Tasks I Got Help With</h2>
-      <AllTasks filteredTasks={tasksIGotHelpWith}/>
-    </div>
+    <Container fluid>
+      <Row>
+        <div className="push">
+          <Col>
+            <h1 className="display-5 headline">My Task Board</h1>
+          </Col>
+        </div>
+      </Row>
+      <Row>
+        <div className="push">
+          <Col>
+            <MyPieChart data={myCompletedTasks} />
+          </Col>
+        </div>
+      </Row>
+      <Row className="taskget">
+        <Col>
+          <h2>I Am Working On</h2>
+          <AllTasks
+            onComplete={updateMyBoardPage}
+            filteredTasks={myAssignments}
+            tasksIGot
+          />
+        </Col>
+      </Row>
+      <Row className="taskpost">
+        <Col>
+          <h2>I Need Help</h2>
+          <AllTasks filteredTasks={myTasks} tasksIPosted />
+        </Col>
+      </Row>
+      <Row className="taskdone">
+        <Col>
+          <h2>I Got Help</h2>
+          <AllTasks filteredTasks={tasksIGotHelpWith} />
+        </Col>
+      </Row>
+    </Container>
   );
 };
 
