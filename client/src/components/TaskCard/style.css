@@ -5,6 +5,11 @@
   margin: 10px;
 }
 
+.card-subtitle {
+  margin-top: 10px !important;
+  margin-bottom: 15px !important;
+}
+
 .cfright {
   text-align: right !important;
   margin-right: -20px;
@@ -32,12 +37,28 @@
     text-align: left !important;
 }
 
+.deleteBtn{
+  color: rgb(173, 2, 2) !important;
+}
+
+.deleteBtn:hover{
+  color: rgb(206, 3, 3) !important;
+}
+
+.completeBtn{
+  color: forestgreen !important;
+}
+
+.completeBtn:hover{
+  color: darkgreen !important;
+}
+
 .card-link {
-  color: #0F8D35;
+  color: #0195b6;
 }
 
 .card-link:hover {
-  color: #73D84F
+  color: #5cbed3
 }
 
 .fa-forward {

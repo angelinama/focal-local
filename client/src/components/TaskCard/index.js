@@ -53,7 +53,7 @@ const TaskCard = ({ task, postedBy, tasksIPosted, tasksIGot, onComplete }) => {
             </Card.Header>
             <Card.Body>
               <Card.Title>{task.title}</Card.Title>
-              <Card.Subtitle>
+              <Card.Subtitle className="text-muted">
                 {task.description.substr(0, 20)} ...
               </Card.Subtitle>
 
@@ -69,22 +69,22 @@ const TaskCard = ({ task, postedBy, tasksIPosted, tasksIGot, onComplete }) => {
                 <Col className="cfleft">
                   {tasksIPosted && !task.completed && (
                     <Button
-                      className="leftBtn"
+                      className="leftBtn deleteBtn"
                       variant="link"
                       onClick={() => handleClick(task._id)}
                     >
                       <FontAwesomeIcon icon={faTrashAlt} />
-                      &nbsp; DELETE
+                      &nbsp; Delete
                     </Button>
                   )}
                   {tasksIGot && (
                     <Button
-                      className="leftBtn"
+                      className="leftBtn completeBtn"
                       variant="link"
                       onClick={() => handleComplete(task._id)}
                     >
                       <FontAwesomeIcon icon={faCheckSquare} />
-                      &nbsp; COMPLETE
+                      &nbsp; Complete
                     </Button>
                   )}
                 </Col>
