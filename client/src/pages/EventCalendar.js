@@ -3,6 +3,7 @@ import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import generateGoogleToken from "../utils/googleToken";
+import PostEvent from "./PostEventPage";
 require("dotenv").config();
 
 const Events = () => {
@@ -13,32 +14,6 @@ const Events = () => {
   const ClientId = process.env.REACT_APP_CLIENT_ID;
   const calendarId = process.env.REACT_APP_CALENDAR_ID;
   const SCOPES = process.env.REACT_APP_SCOPES;
-
-  //TODO delete this and get data from a form
-  const endTime = new Date();
-  endTime.setHours(endTime.getHours() + 2);
-  const event = {
-    summary: "Focal local test event",
-    location: "215 1st Ave W, Seattle, WA 98119",
-    description: "Angelina's test events",
-    start: {
-      dateTime: new Date().toISOString(), //ISOString using Date
-      timeZone: "America/Los_Angeles",
-    },
-    end: {
-      dateTime: endTime,
-      timeZone: "America/Los_Angeles",
-    },
-    // recurrence: ["RRULE:FREQ=DAILY;COUNT=2"],
-    // attendees: [],
-    // reminders: {
-    //   useDefault: false,
-    //   overrides: [
-    //     { method: "email", minutes: 24 * 60 },
-    //     { method: "popup", minutes: 10 },
-    //   ],
-    // },
-  };
 
   const [accessToken, setAccessToken] = useState("");
   //TODO instead of run everytime, check the expiration time so that it won't get run every time refresh the page
@@ -82,7 +57,7 @@ const Events = () => {
         timeMin: new Date().toISOString(),
         showDeleted: false,
         singleEvents: true,
-        maxResults: 10,
+        maxResults: 20,
         orderBy: "startTime",
       })
       .then(function (response) {
@@ -104,7 +79,9 @@ const Events = () => {
       });
   }
 
-  const postNewEvent = () => {
+  const postNewEvent = (event) => {
+    // gapi.client.setToken({ access_token: accessToken });
+    console.log(event);
     const request = gapi.client.calendar.events.insert({
       calendarId: calendarId,
       resource: event,
@@ -122,9 +99,10 @@ const Events = () => {
   };
   return (
     <div>
-      <Button variant="success" onClick={postNewEvent}>
+      {/* <Button variant="success" onClick={() => postNewEvent(testEvent)}>
         Post a test Event
-      </Button>{" "}
+      </Button>{" "} */}
+      <PostEvent handleSubmit={postNewEvent}></PostEvent>
       {/* <h1>***** Where the event lists goes later</h1> */}
       <Container>
         <Row className="justify-content-md-center">
