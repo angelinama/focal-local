@@ -80,14 +80,13 @@ const GetTaskPage = () => {
   console.log({ watch, errors });
 
   return (
-    // <Wrapper>
     <Container fluid>
       <Row>
-        <Wrapper>
-          <Col>
+        <div className="push">
+          <Col className="push">
             <h1 className="display-5 headline">Get a Task</h1>
           </Col>
-        </Wrapper>
+        </div>
         </Row>
         <Row>
         <Wrapper>
@@ -151,7 +150,6 @@ const GetTaskPage = () => {
         </Col>
       </Row>
     </Container>
-    // </Wrapper>
   );
 };
 

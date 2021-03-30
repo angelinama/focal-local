@@ -5,7 +5,6 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { useForm } from "react-hook-form";
 import moment from "moment";
-import Wrapper from "../components/Wrapper";
 import axios from "axios";
 import { useGlobalContext } from "../context/GlobalState";
 import swal from "sweetalert";
@@ -71,167 +70,179 @@ const PostTaskPage = () => {
   // console.log('Errors watch', {errors, watch} );
 
   return (
-    <Wrapper>
-      <Container>
-        <Row>
-          <h1 className="display-5 headline">Post a Task</h1>
-        </Row>
-        {/* "handleSubmit" will validate your inputs before invoking "onSubmit" */}
-        <Form onSubmit={handleSubmit(onSubmit)}>
-          {/* register your input into the hook by invoking the "register" function */}
-          <Form.Group controlId="formCategory">
-            <Form.Label>Choose a category</Form.Label>
-            <Form.Control as="select" name="category" ref={register}>
-              {options.map((value) => (
-                <option key={value} value={value}>
-                  {value}
-                </option>
-              ))}
-            </Form.Control>
-          </Form.Group>
-          {/* TITLE */}
-          <Form.Group controlId="formTitle">
-            <Form.Label>Title</Form.Label>
-            <Form.Control
-              name="title"
-              defaultValue=""
-              placeholder="Plant rose gargen"
-              ref={register({ required: true, maxLength: 50, minLength: 8 })}
-              className={errors.title ? "error" : ""}
-            />
-            {errors.title &&
-              errorMessage({
-                type: errors?.title?.type,
-                minLength: 8,
-                maxLength: 50,
-              })}
-          </Form.Group>
-          {/* DESCRIPTION  */}
-          <Form.Group controlId="formDescription">
-            <Form.Label>Description</Form.Label>
-            <Form.Control
-              name="description"
-              ref={register({
-                required: true,
-                maxLength: 250,
-                minLength: 20,
-              })}
-              className={errors.description ? "error" : ""}
-            />
-            {/* errors will return when field validation fails  */}
-            {errors.description &&
-              errorMessage({
-                type: errors?.description?.type,
-                minLength: 20,
-                maxLength: 250,
-              })}
-          </Form.Group>
-          {/* PAY RATE  */}
-          <Form.Group controlId="formPayRate">
-            <Form.Label>How much will you pay?</Form.Label>
-            <InputGroup className="mb-3">
-              <InputGroup.Prepend>
-                <InputGroup.Text>$</InputGroup.Text>
-              </InputGroup.Prepend>
-              <Form.Control
-                aria-label="Amount (to the nearest dollar)"
-                name="payrate"
-                ref={register({ required: true })}
-                className={errors.payrate ? "error" : ""}
-              />
-              <InputGroup.Append>
-                <InputGroup.Text>.00</InputGroup.Text>
-              </InputGroup.Append>
-            </InputGroup>
-            {/* errors will return when field validation fails  */}
-            {errors.payrate &&
-              errorMessage({
-                type: errors?.payrate?.type,
-              })}
-          </Form.Group>
-          <Form.Row>
-            {/* START DATE  */}
-            <Form.Group as={Col} controlId="formStartDate">
-              <Form.Label>Start Date</Form.Label>
-              <Form.Control
-                name="startdate"
-                type="date"
-                ref={register({ required: true })}
-                className={errors.startdate ? "error" : ""}
-              />
-              {/* errors will return when field validation fails  */}
-              {errors.startdate &&
-                errorMessage({
-                  type: errors?.startdate?.type,
-                })}
-            </Form.Group>
-            <Form.Group as={Col} controlId="formEndDate">
-              {/* END DATE  */}
-              <Form.Label>End Date</Form.Label>
-              <Form.Control
-                name="enddate"
-                type="date"
-                ref={register({ required: false })}
-                className={errors.enddate ? "error" : ""}
-              />
-              {/* errors will return when field validation fails  */}
-              {errors.enddate &&
-                errorMessage({
-                  type: errors?.enddate?.type,
-                })}
-            </Form.Group>
-          </Form.Row>
-          <Form.Row>
-            {/* START TIME  */}
-            <Form.Group as={Col} controlId="formStartTime">
-              <Form.Label>Start Time</Form.Label>
-              <Form.Control
-                name="starttime"
-                type="time"
-                ref={register({ required: true })}
-                className={errors.starttime ? "error" : ""}
-              />
-              {/* errors will return when field validation fails  */}
-              {errors.starttime &&
-                errorMessage({
-                  type: errors?.starttime?.type,
-                })}
-            </Form.Group>
-            <Form.Group as={Col} controlId="formEndTime">
-              {/* END TIME  */}
-              <Form.Label>End Time</Form.Label>
-              <Form.Control
-                name="endtime"
-                type="time"
-                ref={register({ required: false })}
-                className={errors.endtime ? "error" : ""}
-              />
-              {/* errors will return when field validation fails  */}
-              {errors.endtime &&
-                errorMessage({
-                  type: errors?.endtime?.type,
-                })}
-            </Form.Group>
-          </Form.Row>
+    <Container fluid>
+      <Row>
+        <div className="push">
+          <Col>
+            <h1 className="display-5 headline">Post a Task</h1>
+          </Col>
+        </div>
+      </Row>
+      <Row>
+        <div className="push">
+          <Col>
+            {/* "handleSubmit" will validate your inputs before invoking "onSubmit" */}
+            <Form onSubmit={handleSubmit(onSubmit)}>
+              {/* register your input into the hook by invoking the "register" function */}
+              <Form.Group controlId="formCategory">
+                <Form.Label>Choose a category</Form.Label>
+                <Form.Control as="select" name="category" ref={register}>
+                  {options.map((value) => (
+                    <option key={value} value={value}>
+                      {value}
+                    </option>
+                  ))}
+                </Form.Control>
+              </Form.Group>
+              {/* TITLE */}
+              <Form.Group controlId="formTitle">
+                <Form.Label>Title</Form.Label>
+                <Form.Control
+                  name="title"
+                  defaultValue=""
+                  placeholder="Plant rose gargen"
+                  ref={register({
+                    required: true,
+                    maxLength: 50,
+                    minLength: 8,
+                  })}
+                  className={errors.title ? "error" : ""}
+                />
+                {errors.title &&
+                  errorMessage({
+                    type: errors?.title?.type,
+                    minLength: 8,
+                    maxLength: 50,
+                  })}
+              </Form.Group>
+              {/* DESCRIPTION  */}
+              <Form.Group controlId="formDescription">
+                <Form.Label>Description</Form.Label>
+                <Form.Control
+                  name="description"
+                  ref={register({
+                    required: true,
+                    maxLength: 250,
+                    minLength: 20,
+                  })}
+                  className={errors.description ? "error" : ""}
+                />
+                {/* errors will return when field validation fails  */}
+                {errors.description &&
+                  errorMessage({
+                    type: errors?.description?.type,
+                    minLength: 20,
+                    maxLength: 250,
+                  })}
+              </Form.Group>
+              {/* PAY RATE  */}
+              <Form.Group controlId="formPayRate">
+                <Form.Label>How much will you pay?</Form.Label>
+                <InputGroup className="mb-3">
+                  <InputGroup.Prepend>
+                    <InputGroup.Text>$</InputGroup.Text>
+                  </InputGroup.Prepend>
+                  <Form.Control
+                    aria-label="Amount (to the nearest dollar)"
+                    name="payrate"
+                    ref={register({ required: true })}
+                    className={errors.payrate ? "error" : ""}
+                  />
+                  <InputGroup.Append>
+                    <InputGroup.Text>.00</InputGroup.Text>
+                  </InputGroup.Append>
+                </InputGroup>
+                {/* errors will return when field validation fails  */}
+                {errors.payrate &&
+                  errorMessage({
+                    type: errors?.payrate?.type,
+                  })}
+              </Form.Group>
+              <Form.Row>
+                {/* START DATE  */}
+                <Form.Group as={Col} controlId="formStartDate">
+                  <Form.Label>Start Date</Form.Label>
+                  <Form.Control
+                    name="startdate"
+                    type="date"
+                    ref={register({ required: true })}
+                    className={errors.startdate ? "error" : ""}
+                  />
+                  {/* errors will return when field validation fails  */}
+                  {errors.startdate &&
+                    errorMessage({
+                      type: errors?.startdate?.type,
+                    })}
+                </Form.Group>
+                <Form.Group as={Col} controlId="formEndDate">
+                  {/* END DATE  */}
+                  <Form.Label>End Date</Form.Label>
+                  <Form.Control
+                    name="enddate"
+                    type="date"
+                    ref={register({ required: false })}
+                    className={errors.enddate ? "error" : ""}
+                  />
+                  {/* errors will return when field validation fails  */}
+                  {errors.enddate &&
+                    errorMessage({
+                      type: errors?.enddate?.type,
+                    })}
+                </Form.Group>
+              </Form.Row>
+              <Form.Row>
+                {/* START TIME  */}
+                <Form.Group as={Col} controlId="formStartTime">
+                  <Form.Label>Start Time</Form.Label>
+                  <Form.Control
+                    name="starttime"
+                    type="time"
+                    ref={register({ required: true })}
+                    className={errors.starttime ? "error" : ""}
+                  />
+                  {/* errors will return when field validation fails  */}
+                  {errors.starttime &&
+                    errorMessage({
+                      type: errors?.starttime?.type,
+                    })}
+                </Form.Group>
+                <Form.Group as={Col} controlId="formEndTime">
+                  {/* END TIME  */}
+                  <Form.Label>End Time</Form.Label>
+                  <Form.Control
+                    name="endtime"
+                    type="time"
+                    ref={register({ required: false })}
+                    className={errors.endtime ? "error" : ""}
+                  />
+                  {/* errors will return when field validation fails  */}
+                  {errors.endtime &&
+                    errorMessage({
+                      type: errors?.endtime?.type,
+                    })}
+                </Form.Group>
+              </Form.Row>
 
-          <Button className="posttaskbtn" type="submit" ref={target}>
-            {" "}
-            Submit{" "}
-          </Button>
-          {/* --- */}
-          {show && (
-            <Overlay target={target.current} show={show} placement="right">
-              {(props) => (
-                <Tooltip id="overlay-example" {...props}>
-                  Task Saved!
-                </Tooltip>
+              <Button className="posttaskbtn" type="submit" ref={target}>
+                {" "}
+                Submit{" "}
+              </Button>
+              {/* --- */}
+              {show && (
+                <Overlay target={target.current} show={show} placement="right">
+                  {(props) => (
+                    <Tooltip id="overlay-example" {...props}>
+                      Task Saved!
+                    </Tooltip>
+                  )}
+                </Overlay>
               )}
-            </Overlay>
-          )}
-          {/* --- */}
-        </Form>
-      </Container>
-    </Wrapper>
+              {/* --- */}
+            </Form>
+          </Col>
+        </div>
+      </Row>
+    </Container>
   );
 };
 
