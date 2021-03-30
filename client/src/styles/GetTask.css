@@ -9,5 +9,10 @@
 }
 
 .headline {
-  margin-bottom: 3.5rem;
+  margin-top: 3rem;
+}
+
+.alltasksrow {
+  background-color: #F0F8F9;
+  padding: 3rem !important;
 }

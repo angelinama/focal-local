@@ -10,6 +10,7 @@ import AllTasks from "../components/AllTasks";
 import { useGlobalContext } from "../context/GlobalState";
 import "../styles/GetTask.css";
 import { isMyTask } from "../utils";
+import Background from "../components/Background"
 
 const options = ["Home repairs", "Shopping", "Baby sitting", "Pet sitting"];
 
@@ -64,15 +65,15 @@ const GetTaskPage = () => {
         return data.volunteer ? task.payrate === 0 : true;
       })
       .filter((task) => {
-        
+
         if(!data.startdate) return true;
         let startFilterDate = new Date(data.startdate);
-        
+
         let taskDate = new Date(task.startdate);
-      
+
         return taskDate.getTime() > startFilterDate.getTime();
       });
-      
+
     setFilteredTasks(results);
     reset();
   };
@@ -80,14 +81,17 @@ const GetTaskPage = () => {
   console.log({ watch, errors });
 
   return (
-    <Wrapper>
-      <Container fluid>
-        <Row>
+    // <Wrapper>
+    <Container fluid>
+      <Row>
+        <Wrapper>
           <Col>
             <h1 className="display-5 headline">Get a Task</h1>
           </Col>
+        </Wrapper>
         </Row>
         <Row>
+        <Wrapper>
           <Col>
             <Form onSubmit={handleSubmit(onSubmit)}>
               {/* CATEGORY  */}
@@ -136,16 +140,19 @@ const GetTaskPage = () => {
               </Button>
             </Form>
           </Col>
-        </Row>
-        <Row>
-            <AllTasks
-              taskList={taskList}
-              filteredTasks={filteredTasks}
-              setFilteredTasks={setFilteredTasks}
-            />
-        </Row>
-      </Container>
-    </Wrapper>
+        </Wrapper>
+      </Row>
+      <Row className="alltasksrow">
+        <Col className="alltaskcol">
+          <AllTasks
+            taskList={taskList}
+            filteredTasks={filteredTasks}
+            setFilteredTasks={setFilteredTasks}
+          />
+        </Col>
+      </Row>
+    </Container>
+    // </Wrapper>
   );
 };
 
