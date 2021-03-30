@@ -4,9 +4,41 @@
   height: 87vh
 }
 
+.push {
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .headline {
   margin-top: 3rem;
   margin-bottom: 3rem;
+}
+
+.cright {
+  text-align: right !important;
+  margin-right: 10px;
+}
+
+.cleft {
+  text-align: left !important;
+  margin-left: 10px;
+}
+
+.rightBtn {
+    text-align: right !important;
+}
+
+.leftBtn {
+    text-align: left !important;
+}
+
+.fa-puzzle-piece {
+  font-size: 1.3rem;
+}
+
+.fa-envelope {
+  font-size: 1.3rem;
 }
 
 .footerpush {
