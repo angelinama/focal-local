@@ -64,15 +64,15 @@ const GetTaskPage = () => {
         return data.volunteer ? task.payrate === 0 : true;
       })
       .filter((task) => {
-        
+
         if(!data.startdate) return true;
         let startFilterDate = new Date(data.startdate);
-        
+
         let taskDate = new Date(task.startdate);
-      
+
         return taskDate.getTime() > startFilterDate.getTime();
       });
-      
+
     setFilteredTasks(results);
     reset();
   };
@@ -80,14 +80,16 @@ const GetTaskPage = () => {
   console.log({ watch, errors });
 
   return (
-    <Wrapper>
-      <Container fluid>
-        <Row>
-          <Col>
+    <Container fluid>
+      <Row>
+        <div className="push">
+          <Col className="push">
             <h1 className="display-5 headline">Get a Task</h1>
           </Col>
+        </div>
         </Row>
         <Row>
+        <Wrapper>
           <Col>
             <Form onSubmit={handleSubmit(onSubmit)}>
               {/* CATEGORY  */}
@@ -136,16 +138,18 @@ const GetTaskPage = () => {
               </Button>
             </Form>
           </Col>
-        </Row>
-        <Row>
-            <AllTasks
-              taskList={taskList}
-              filteredTasks={filteredTasks}
-              setFilteredTasks={setFilteredTasks}
-            />
-        </Row>
-      </Container>
-    </Wrapper>
+        </Wrapper>
+      </Row>
+      <Row className="alltasksrow">
+        <Col className="alltaskcol">
+          <AllTasks
+            taskList={taskList}
+            filteredTasks={filteredTasks}
+            setFilteredTasks={setFilteredTasks}
+          />
+        </Col>
+      </Row>
+    </Container>
   );
 };
 

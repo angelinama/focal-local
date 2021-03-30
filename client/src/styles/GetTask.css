@@ -7,3 +7,18 @@
   font-weight: bolder;
   float: right;
 }
+
+.headline {
+  margin-top: 3rem;
+}
+
+.push {
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.alltasksrow {
+  background-color: #F0F8F9;
+  padding: 3rem !important;
+}
