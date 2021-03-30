@@ -6,11 +6,14 @@
 }
 
 .cfright {
-  text-align: right;
+  text-align: right !important;
+  margin-right: -20px;
 }
 
 .cfleft {
-  text-align: left;
+  text-align: left !important;
+  margin-left: -20px;
+  margin-right: -20px;
 }
 
 .fa-trash-alt {
@@ -21,8 +24,16 @@
   font-size: 1.3rem;
 }
 
+.rightBtn {
+    text-align: right !important;
+}
+
+.leftBtn {
+    text-align: left !important;
+}
+
 .card-link {
-  color: #0F8D35
+  color: #0F8D35;
 }
 
 .card-link:hover {

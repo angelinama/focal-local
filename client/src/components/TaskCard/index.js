@@ -53,7 +53,9 @@ const TaskCard = ({ task, postedBy, tasksIPosted, tasksIGot, onComplete }) => {
             </Card.Header>
             <Card.Body>
               <Card.Title>{task.title}</Card.Title>
-              <Card.Text>{task.description.substr(0, 20)} ...</Card.Text>
+              <Card.Subtitle>
+                {task.description.substr(0, 20)} ...
+              </Card.Subtitle>
 
               <Card.Text>
                 <FontAwesomeIcon icon={faCalendarCheck} />
@@ -67,6 +69,7 @@ const TaskCard = ({ task, postedBy, tasksIPosted, tasksIGot, onComplete }) => {
                 <Col className="cfleft">
                   {tasksIPosted && !task.completed && (
                     <Button
+                      className="leftBtn"
                       variant="link"
                       onClick={() => handleClick(task._id)}
                     >
@@ -76,6 +79,7 @@ const TaskCard = ({ task, postedBy, tasksIPosted, tasksIGot, onComplete }) => {
                   )}
                   {tasksIGot && (
                     <Button
+                      className="leftBtn"
                       variant="link"
                       onClick={() => handleComplete(task._id)}
                     >
@@ -86,7 +90,7 @@ const TaskCard = ({ task, postedBy, tasksIPosted, tasksIGot, onComplete }) => {
                 </Col>
                 <Col className="cfright">
                   {!postedBy && (
-                    <Button variant="link">
+                    <Button className="rightBtn" variant="link">
                       <LinkContainer to={`/details/${task._id}`}>
                         <Card.Link>
                           Details <FontAwesomeIcon icon={faForward} />
