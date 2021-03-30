@@ -32,7 +32,7 @@ const generateGoogleToken = (cb) => {
       },
     })
     .then(({ data }) => {
-      console.log(data);
+      //   console.log(data);
       cb(data);
     })
     .catch((err) => console.log(err));
