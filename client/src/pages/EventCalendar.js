@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
+import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import generateGoogleToken from "../utils/googleToken";
 import PostEvent from "./PostEventPage";
-import axios from "axios";
 require("dotenv").config();
 
 const Events = () => {
@@ -18,12 +18,7 @@ const Events = () => {
   const [accessToken, setAccessToken] = useState("");
   //TODO instead of run everytime, check the expiration time so that it won't get run every time refresh the page
   useEffect(() => {
-    generateGoogleToken((token) => {
-      setAccessToken(token.access_token);
-      axios.defaults.headers.common[
-        "Authorization"
-      ] = `Bearer ${token.access_token}`;
-    });
+    generateGoogleToken(setAccessToken);
   }, []);
 
   useEffect(() => {
@@ -84,42 +79,30 @@ const Events = () => {
       });
   }
 
-  // const postNewEvent = (event) => {
-  //   // gapi.client.setToken({ access_token: accessToken });
-  //   console.log(event);
-  //   const request = gapi.client.calendar.events.insert({
-  //     calendarId: calendarId,
-  //     resource: event,
-  //   });
+  const postNewEvent = (event) => {
+    // gapi.client.setToken({ access_token: accessToken });
+    console.log(event);
+    const request = gapi.client.calendar.events.insert({
+      calendarId: calendarId,
+      resource: event,
+    });
 
-  //   request.execute(function (event) {
-  //     if (event.htmlLink) {
-  //       console.log("Event created: " + event.htmlLink);
-  //     } else {
-  //       alert(
-  //         "something went wrong when trying to create events on Google Calendar"
-  //       );
-  //     }
-  //   });
-  // };
-
-  const postRequest = (event) => {
-    console.log(accessToken.access_token);
-    console.log(axios.defaults.headers);
-    axios
-      .post(
-        `https://www.googleapis.com/calendar/v3/calendars/${calendarId}/events`,
-        event
-      )
-      .then((data) => console.log(data))
-      .catch((err) => console.log(err));
+    request.execute(function (event) {
+      if (event.htmlLink) {
+        console.log("Event created: " + event.htmlLink);
+      } else {
+        alert(
+          "something went wrong when trying to create events on Google Calendar"
+        );
+      }
+    });
   };
   return (
     <div>
       {/* <Button variant="success" onClick={() => postNewEvent(testEvent)}>
         Post a test Event
       </Button>{" "} */}
-      <PostEvent handleSubmit={postRequest}></PostEvent>
+      <PostEvent handleSubmit={postNewEvent}></PostEvent>
       {/* <h1>***** Where the event lists goes later</h1> */}
       <Container>
         <Row className="justify-content-md-center">
