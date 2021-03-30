@@ -3,8 +3,11 @@ import { Redirect, useParams } from "react-router-dom";
 import axios from "axios";
 import { useGlobalContext } from "../context/GlobalState";
 import TaskDetails from "../components/TaskDetails";
-import Wrapper from "../components/Wrapper";
 import Button from "react-bootstrap/Button";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import "../styles/TaskDetails.css";
 
 const TaskDetailsPage = () => {
   //Attach authentication token to api request
@@ -56,18 +59,38 @@ const TaskDetailsPage = () => {
   };
 
   return (
-    <>
-      <Wrapper>
-        <h1>*** Task Details Page ***</h1>
-        <TaskDetails task={task} postedBy={user?.userName} />
-
-        <Button onClick={handleClick}>GET THE TASK</Button>
-        <Button href={`mailto: ${user?.email}`}>ASK A QUESTION</Button>
-        {goToMyBoard &&
-          <Redirect to="/myboard"/>
-        }
-      </Wrapper>
-    </>
+    <Container fluid className="maincontainer">
+      <Row>
+        <div className="push">
+          <Col>
+            <h1 className="display-5 headline">Task Details</h1>
+          </Col>
+        </div>
+      </Row>
+      <Row>
+        <div className="push">
+          <Col>
+            <TaskDetails task={task} postedBy={user?.userName} />
+          </Col>
+        </div>
+      </Row>
+      <div className="push">
+        <Row>
+          <Col>
+            <Button onClick={handleClick}>GET THE TASK</Button>
+          </Col>
+          <Col>
+            <Button href={`mailto: ${user?.email}`}>ASK A QUESTION</Button>
+            {goToMyBoard && <Redirect to="/myboard" />}
+          </Col>
+        </Row>
+      </div>
+      <Row>
+        <Col>
+          <div className="footerpush"></div>
+        </Col>
+      </Row>
+    </Container>
   );
 };
 

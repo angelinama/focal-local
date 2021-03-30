@@ -33,8 +33,8 @@ const TaskDetails = ({ task, postedBy, tasksIPosted }) => {
             <Card.Header>{task.category}</Card.Header>
             <Card.Body>
               <Card.Title>{task.title}</Card.Title>
-              <Card.Text>{task.description}</Card.Text>
-              <Card.Text>${task.payrate}</Card.Text>
+              <Card.Text>Description: {task.description}</Card.Text>
+              <Card.Text>Pay Rate: ${task.payrate}</Card.Text>
               <Card.Text>Starting: {startdate}</Card.Text>
               {enddate &&
               <Card.Text>Ending: {enddate}</Card.Text>

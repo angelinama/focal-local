@@ -1,0 +1,14 @@
+.maincontainer {
+  background-color: #F0F8F9;
+  padding: 3rem !important;
+  height: 87vh
+}
+
+.headline {
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+}
+
+.footerpush {
+  height:100px;
+}
