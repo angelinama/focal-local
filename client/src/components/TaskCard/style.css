@@ -1,12 +1,24 @@
 .taskcard {
   box-shadow: 0px 10px 30px -5px rgba(0, 0, 0, 0.3);
-  max-width: 30ch;
-  min-height: 30ex;
+  max-width: 40ch;
+  min-height: 35ex;
   margin: 10px;
 }
 
-.card-footer {
+.cfright {
   text-align: right;
+}
+
+.cfleft {
+  text-align: left;
+}
+
+.fa-trash-alt {
+  font-size: 1.3rem;
+}
+
+.fa-check-square {
+  font-size: 1.3rem;
 }
 
 .card-link {
@@ -15,4 +27,8 @@
 
 .card-link:hover {
   color: #73D84F
+}
+
+.fa-forward {
+  font-size: 1rem;
 }

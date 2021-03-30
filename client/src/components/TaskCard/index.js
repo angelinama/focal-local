@@ -1,14 +1,19 @@
 import React, { useState } from "react";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
-import AnimatedCard from "../AnimatedCard"
+import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
 import { LinkContainer } from "react-router-bootstrap";
 import axios from "axios";
+import moment from "moment";
 import "./style.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faForward } from "@fortawesome/free-solid-svg-icons";
-
-
+import {
+  faCalendarCheck,
+  faCheckSquare,
+  faForward,
+  faTrashAlt,
+} from "@fortawesome/free-solid-svg-icons";
 
 const TaskCard = ({ task, postedBy, tasksIPosted, tasksIGot, onComplete }) => {
   //hook for deleted tasks
@@ -35,15 +40,13 @@ const TaskCard = ({ task, postedBy, tasksIPosted, tasksIGot, onComplete }) => {
       .catch((error) => console.log(error));
   }; 
 
-  let date = new Date(task.startdate);
-  date =
-    date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
+  let date = moment(new Date(task.startdate)).format(
+    "MMMM Do, YYYY");
 
   return (
     <>
       {hide ? null : (
         <div>
-          {/* <AnimatedCard> */}
           <Card className="taskcard">
             <Card.Header className="mb-2 text-muted">
               {task.category}
@@ -52,31 +55,49 @@ const TaskCard = ({ task, postedBy, tasksIPosted, tasksIGot, onComplete }) => {
               <Card.Title>{task.title}</Card.Title>
               <Card.Text>{task.description.substr(0, 20)} ...</Card.Text>
 
-              <Card.Text>{date}</Card.Text>
+              <Card.Text>
+                <FontAwesomeIcon icon={faCalendarCheck} />
+                &nbsp;{date}
+              </Card.Text>
 
               {postedBy && <p>Posted by {postedBy}</p>}
             </Card.Body>
             <Card.Footer>
-              {!postedBy && (
-                <LinkContainer to={`/details/${task._id}`}>
-                  <Card.Link>
-                    Details <FontAwesomeIcon icon={faForward} />
-                  </Card.Link>
-                </LinkContainer>
-              )}
-              {tasksIPosted && !task.completed && (
-                <Button onClick={() => handleClick(task._id)}>
-                  DELETE TASK
-                </Button>
-              )}
-              {tasksIGot && (
-                <Button onClick={() => handleComplete(task._id)}>
-                  COMPLETE
-                </Button>
-              )}
+              <Row>
+                <Col className="cfleft">
+                  {tasksIPosted && !task.completed && (
+                    <Button
+                      variant="link"
+                      onClick={() => handleClick(task._id)}
+                    >
+                      <FontAwesomeIcon icon={faTrashAlt} />
+                      &nbsp; DELETE
+                    </Button>
+                  )}
+                  {tasksIGot && (
+                    <Button
+                      variant="link"
+                      onClick={() => handleComplete(task._id)}
+                    >
+                      <FontAwesomeIcon icon={faCheckSquare} />
+                      &nbsp; COMPLETE
+                    </Button>
+                  )}
+                </Col>
+                <Col className="cfright">
+                  {!postedBy && (
+                    <Button variant="link">
+                      <LinkContainer to={`/details/${task._id}`}>
+                        <Card.Link>
+                          Details <FontAwesomeIcon icon={faForward} />
+                        </Card.Link>
+                      </LinkContainer>
+                    </Button>
+                  )}
+                </Col>
+              </Row>
             </Card.Footer>
           </Card>
-          {/* </AnimatedCard> */}
         </div>
       )}
     </>
