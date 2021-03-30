@@ -75,12 +75,6 @@ const Events = () => {
     }
   }, [accessToken]);
 
-  // function appendPre(message) {
-  //   var pre = document.getElementById("content");
-  //   var textContent = document.createTextNode(message + "\n");
-  //   pre.appendChild(textContent);
-  // }
-
   function listUpcomingEvents() {
     gapi.client.calendar.events
       .list({
