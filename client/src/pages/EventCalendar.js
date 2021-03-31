@@ -41,10 +41,10 @@ const Events = () => {
             "https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest",
           ],
           scope: SCOPES,
-          accessToken: accessToken,
         })
         .then(
           function () {
+            gapi.client.setToken({ access_token: accessToken });
             console.log(gapi.client.getToken());
             listUpcomingEvents();
           },
@@ -84,42 +84,39 @@ const Events = () => {
       });
   }
 
-  // const postNewEvent = (event) => {
-  //   // gapi.client.setToken({ access_token: accessToken });
-  //   console.log(event);
-  //   const request = gapi.client.calendar.events.insert({
-  //     calendarId: calendarId,
-  //     resource: event,
-  //   });
+  const postNewEvent = (event) => {
+    console.log(event);
+    const request = gapi.client.calendar.events.insert({
+      calendarId: calendarId,
+      resource: event,
+    });
 
-  //   request.execute(function (event) {
-  //     if (event.htmlLink) {
-  //       console.log("Event created: " + event.htmlLink);
-  //     } else {
-  //       alert(
-  //         "something went wrong when trying to create events on Google Calendar"
-  //       );
-  //     }
-  //   });
+    request.execute(function (event) {
+      if (event.htmlLink) {
+        console.log("Event created: " + event.htmlLink);
+      } else {
+        alert(
+          "something went wrong when trying to create events on Google Calendar"
+        );
+      }
+    });
+  };
+
+  // const postRequest = (event) => {
+  //   console.log(accessToken.access_token);
+  //   console.log(axios.defaults.headers);
+  //   axios
+  //     .post(
+  //       `https://www.googleapis.com/calendar/v3/calendars/${calendarId}/events`,
+  //       event
+  //     )
+  //     .then((data) => console.log(data))
+  //     .catch((err) => console.log(err));
   // };
 
-  const postRequest = (event) => {
-    console.log(accessToken.access_token);
-    console.log(axios.defaults.headers);
-    axios
-      .post(
-        `https://www.googleapis.com/calendar/v3/calendars/${calendarId}/events`,
-        event
-      )
-      .then((data) => console.log(data))
-      .catch((err) => console.log(err));
-  };
   return (
     <div>
-      {/* <Button variant="success" onClick={() => postNewEvent(testEvent)}>
-        Post a test Event
-      </Button>{" "} */}
-      <PostEvent handleSubmit={postRequest}></PostEvent>
+      <PostEvent handleSubmit={postNewEvent}></PostEvent>
       {/* <h1>***** Where the event lists goes later</h1> */}
       <Container>
         <Row className="justify-content-md-center">
