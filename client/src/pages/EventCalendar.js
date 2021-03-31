@@ -10,16 +10,14 @@ const Events = () => {
   const gapi = window.gapi;
 
   //consts need to user google calendar API
-  const APIKey = process.env.REACT_APP_APIKey;
-  const ClientId = process.env.REACT_APP_CLIENT_ID;
   const calendarId = process.env.REACT_APP_CALENDAR_ID;
-  const SCOPES = process.env.REACT_APP_SCOPES;
 
   const [accessToken, setAccessToken] = useState("");
   //TODO instead of run everytime, check the expiration time so that it won't get run every time refresh the page
   useEffect(() => {
     generateGoogleToken((token) => {
       setAccessToken(token.access_token);
+      //TODO to delete this if only using Google client Library solution
       axios.defaults.headers.common[
         "Authorization"
       ] = `Bearer ${token.access_token}`;
@@ -35,17 +33,17 @@ const Events = () => {
     function initClient() {
       gapi.client
         .init({
-          apiKey: APIKey,
-          clientId: ClientId,
+          apiKey: process.env.REACT_APP_APIKey,
+          clientId: process.env.REACT_APP_CLIENT_ID,
           discoveryDocs: [
             "https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest",
           ],
-          scope: SCOPES,
-          accessToken: accessToken,
+          scope: process.env.REACT_APP_SCOPES,
         })
         .then(
           function () {
-            console.log(gapi.client.getToken());
+            gapi.client.setToken({ access_token: accessToken });
+            // console.log(gapi.client.getToken());
             listUpcomingEvents();
           },
           function (error) {
@@ -53,73 +51,72 @@ const Events = () => {
           }
         );
     }
-  }, [accessToken]);
 
-  function listUpcomingEvents() {
-    gapi.client.calendar.events
-      .list({
-        calendarId: calendarId,
-        timeMin: new Date().toISOString(),
-        showDeleted: false,
-        singleEvents: true,
-        maxResults: 20,
-        orderBy: "startTime",
-      })
-      .then(function (response) {
-        var events = response.result.items;
-        console.log("Upcoming events:");
+    //TODO change this function to display upcoming events on page instead of console
+    function listUpcomingEvents() {
+      gapi.client.calendar.events
+        .list({
+          calendarId: process.env.REACT_APP_CALENDAR_ID,
+          timeMin: new Date().toISOString(),
+          showDeleted: false,
+          singleEvents: true,
+          maxResults: 20,
+          orderBy: "startTime",
+        })
+        .then(function (response) {
+          var events = response.result.items;
+          console.log("Upcoming events:");
 
-        if (events.length > 0) {
-          for (let i = 0; i < events.length; i++) {
-            var event = events[i];
-            var when = event.start.dateTime;
-            if (!when) {
-              when = event.start.date;
+          if (events.length > 0) {
+            for (let i = 0; i < events.length; i++) {
+              var event = events[i];
+              var when = event.start.dateTime;
+              if (!when) {
+                when = event.start.date;
+              }
+              console.log(event.summary + " (" + when + ")");
             }
-            console.log(event.summary + " (" + when + ")");
+          } else {
+            console.log("No upcoming events found.");
           }
-        } else {
-          console.log("No upcoming events found.");
-        }
-      });
-  }
+        });
+    }
+  }, [accessToken, gapi]);
 
-  // const postNewEvent = (event) => {
-  //   // gapi.client.setToken({ access_token: accessToken });
-  //   console.log(event);
-  //   const request = gapi.client.calendar.events.insert({
-  //     calendarId: calendarId,
-  //     resource: event,
-  //   });
+  const postNewEvent = (event) => {
+    console.log(event);
+    const request = gapi.client.calendar.events.insert({
+      calendarId: calendarId,
+      resource: event,
+    });
 
-  //   request.execute(function (event) {
-  //     if (event.htmlLink) {
-  //       console.log("Event created: " + event.htmlLink);
-  //     } else {
-  //       alert(
-  //         "something went wrong when trying to create events on Google Calendar"
-  //       );
-  //     }
-  //   });
+    request.execute(function (event) {
+      if (event.htmlLink) {
+        console.log("Event created: " + event.htmlLink);
+      } else {
+        alert(
+          "something went wrong when trying to create events on Google Calendar"
+        );
+      }
+    });
+  };
+
+  // REST API solution by using axios
+  // const postRequest = (event) => {
+  //   console.log(accessToken.access_token);
+  //   console.log(axios.defaults.headers);
+  //   axios
+  //     .post(
+  //       `https://www.googleapis.com/calendar/v3/calendars/${calendarId}/events`,
+  //       event
+  //     )
+  //     .then((data) => console.log(data))
+  //     .catch((err) => console.log(err));
   // };
 
-  const postRequest = (event) => {
-    console.log(accessToken.access_token);
-    console.log(axios.defaults.headers);
-    axios
-      .post(
-        `https://www.googleapis.com/calendar/v3/calendars/${calendarId}/events`,
-        event
-      )
-      .then((data) => console.log(data))
-      .catch((err) => console.log(err));
-  };
   return (
     <div>
-      {/* <Button variant="success" onClick={() => postNewEvent(testEvent)}>
-        Post a test Event
-      </Button>{" "} */}
-      <PostEvent handleSubmit={postRequest}></PostEvent>
+      <PostEvent handleSubmit={postNewEvent}></PostEvent>
       {/* <h1>***** Where the event lists goes later</h1> */}
       <Container>
         <Row className="justify-content-md-center">
